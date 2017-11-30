@@ -1,0 +1,30 @@
+package cn.easywed.stargate.service.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import cn.easywed.stargate.dao.mapper.SysInfoMapper;
+import cn.easywed.stargate.dao.persistence.SysInfo;
+import cn.easywed.stargate.service.ISysInfoService;;
+
+@Service("sysInfoService")
+public class SysInfoServiceImpl implements ISysInfoService {
+
+	@Resource
+	SysInfoMapper sysInfoMapper;
+
+	@Override
+	public List<SysInfo> getSysInfo() {
+		return sysInfoMapper.getSysInfo();
+	}
+	
+
+
+
+
+	
+
+}

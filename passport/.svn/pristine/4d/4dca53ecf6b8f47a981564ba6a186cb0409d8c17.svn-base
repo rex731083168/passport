@@ -1,0 +1,366 @@
+2017-02-24 10:52:13.682 [main] INFO  cn.easywed.stargate.Application -Starting Application on Lenovo-PC with PID 4736 (D:\stargate\target\classes started by easywed in D:\stargate)
+2017-02-24 10:52:13.686 [main] DEBUG cn.easywed.stargate.Application -Running with Spring Boot v1.2.2.RELEASE, Spring v4.1.5.RELEASE
+2017-02-24 10:52:13.743 [main] INFO  org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext -Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@516be40f: startup date [Fri Feb 24 10:52:13 CST 2017]; root of context hierarchy
+2017-02-24 10:52:15.217 [main] INFO  org.springframework.beans.factory.support.DefaultListableBeanFactory -Overriding bean definition for bean 'beanNameViewResolver': replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class]]
+2017-02-24 10:52:16.237 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'dataSourceConfig' of type [class cn.easywed.stargate.config.DataSourceConfig$$EnhancerBySpringCGLIB$$5ababb97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 10:52:16.311 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'dataSource' of type [class org.apache.tomcat.jdbc.pool.DataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 10:52:16.388 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 10:52:16.514 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'userMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 10:52:16.571 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$3b995e93] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 10:52:16.609 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'transactionAttributeSource' of type [class org.springframework.transaction.annotation.AnnotationTransactionAttributeSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 10:52:16.625 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'transactionInterceptor' of type [class org.springframework.transaction.interceptor.TransactionInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 10:52:16.634 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.config.internalTransactionAdvisor' of type [class org.springframework.transaction.interceptor.BeanFactoryTransactionAttributeSourceAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 10:52:17.746 [main] INFO  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer -Tomcat initialized with port(s): 8080 (http)
+2017-02-24 10:52:18.178 [main] INFO  org.apache.catalina.core.StandardService -Starting service Tomcat
+2017-02-24 10:52:18.209 [main] INFO  org.apache.catalina.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/8.0.20
+2017-02-24 10:52:19.100 [localhost-startStop-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] -Initializing Spring embedded WebApplicationContext
+2017-02-24 10:52:20.297 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-02-24 10:52:20.298 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.FilterRegistrationBean -Mapping filter: 'loginFilter' to urls: [/*]
+2017-02-24 10:52:20.299 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-02-24 10:52:20.304 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.ServletRegistrationBean -Mapping servlet: 'dispatcherServlet' to [/]
+2017-02-24 10:52:21.528 [main] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter -Registering beans for JMX exposure on startup
+2017-02-24 10:52:21.759 [main] INFO  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer -Tomcat started on port(s): 8080 (http)
+2017-02-24 10:52:21.764 [main] INFO  cn.easywed.stargate.Application -Started Application in 8.614 seconds (JVM running for 9.907)
+2017-02-24 14:33:24.744 [main] INFO  cn.easywed.stargate.Application -Starting Application on Lenovo-PC with PID 7372 (D:\stargate\target\classes started by easywed in D:\stargate)
+2017-02-24 14:33:24.748 [main] DEBUG cn.easywed.stargate.Application -Running with Spring Boot v1.2.2.RELEASE, Spring v4.1.5.RELEASE
+2017-02-24 14:33:24.812 [main] INFO  org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext -Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@516be40f: startup date [Fri Feb 24 14:33:24 CST 2017]; root of context hierarchy
+2017-02-24 14:33:26.195 [main] INFO  org.springframework.beans.factory.support.DefaultListableBeanFactory -Overriding bean definition for bean 'beanNameViewResolver': replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class]]
+2017-02-24 14:33:27.342 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'dataSourceConfig' of type [class cn.easywed.stargate.config.DataSourceConfig$$EnhancerBySpringCGLIB$$5ababb97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 14:33:27.464 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'dataSource' of type [class org.apache.tomcat.jdbc.pool.DataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 14:33:27.574 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 14:33:27.767 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'userMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 14:33:27.834 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$3b995e93] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 14:33:27.865 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'transactionAttributeSource' of type [class org.springframework.transaction.annotation.AnnotationTransactionAttributeSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 14:33:27.879 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'transactionInterceptor' of type [class org.springframework.transaction.interceptor.TransactionInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 14:33:27.887 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.config.internalTransactionAdvisor' of type [class org.springframework.transaction.interceptor.BeanFactoryTransactionAttributeSourceAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 14:33:29.145 [main] INFO  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer -Tomcat initialized with port(s): 8080 (http)
+2017-02-24 14:33:29.820 [main] INFO  org.apache.catalina.core.StandardService -Starting service Tomcat
+2017-02-24 14:33:29.826 [main] INFO  org.apache.catalina.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/8.0.20
+2017-02-24 14:33:31.130 [localhost-startStop-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] -Initializing Spring embedded WebApplicationContext
+2017-02-24 14:33:36.928 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-02-24 14:33:36.929 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.FilterRegistrationBean -Mapping filter: 'loginFilter' to urls: [/*]
+2017-02-24 14:33:36.930 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-02-24 14:33:36.931 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.ServletRegistrationBean -Mapping servlet: 'dispatcherServlet' to [/]
+2017-02-24 14:33:46.853 [main] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter -Registering beans for JMX exposure on startup
+2017-02-24 14:33:51.302 [main] INFO  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer -Tomcat started on port(s): 8080 (http)
+2017-02-24 14:33:51.305 [main] INFO  cn.easywed.stargate.Application -Started Application in 27.052 seconds (JVM running for 28.201)
+2017-02-24 19:40:30.503 [main] INFO  cn.easywed.stargate.Application -Starting Application on Lenovo-PC with PID 10276 (D:\stargate\target\classes started by easywed in D:\stargate)
+2017-02-24 19:40:30.528 [main] DEBUG cn.easywed.stargate.Application -Running with Spring Boot v1.2.2.RELEASE, Spring v4.1.5.RELEASE
+2017-02-24 19:40:30.580 [main] INFO  org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext -Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@516be40f: startup date [Fri Feb 24 19:40:30 CST 2017]; root of context hierarchy
+2017-02-24 19:40:31.687 [main] INFO  org.springframework.beans.factory.support.DefaultListableBeanFactory -Overriding bean definition for bean 'beanNameViewResolver': replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class]]
+2017-02-24 19:40:32.443 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'dataSourceConfig' of type [class cn.easywed.stargate.config.DataSourceConfig$$EnhancerBySpringCGLIB$$5ababb97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:40:32.521 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'dataSource' of type [class org.apache.tomcat.jdbc.pool.DataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:40:32.609 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:40:32.801 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'userMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:40:32.847 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$3b995e93] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:40:32.876 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'transactionAttributeSource' of type [class org.springframework.transaction.annotation.AnnotationTransactionAttributeSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:40:32.888 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'transactionInterceptor' of type [class org.springframework.transaction.interceptor.TransactionInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:40:32.895 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.config.internalTransactionAdvisor' of type [class org.springframework.transaction.interceptor.BeanFactoryTransactionAttributeSourceAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:40:33.726 [main] INFO  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer -Tomcat initialized with port(s): 8080 (http)
+2017-02-24 19:40:34.060 [main] INFO  org.apache.catalina.core.StandardService -Starting service Tomcat
+2017-02-24 19:40:34.063 [main] INFO  org.apache.catalina.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/8.0.20
+2017-02-24 19:40:34.661 [localhost-startStop-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] -Initializing Spring embedded WebApplicationContext
+2017-02-24 19:40:35.719 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-02-24 19:40:35.721 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.FilterRegistrationBean -Mapping filter: 'loginFilter' to urls: [/*]
+2017-02-24 19:40:35.723 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-02-24 19:40:35.723 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.ServletRegistrationBean -Mapping servlet: 'dispatcherServlet' to [/]
+2017-02-24 19:40:36.774 [main] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter -Registering beans for JMX exposure on startup
+2017-02-24 19:40:36.941 [main] INFO  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer -Tomcat started on port(s): 8080 (http)
+2017-02-24 19:40:36.947 [main] INFO  cn.easywed.stargate.Application -Started Application in 6.87 seconds (JVM running for 7.89)
+2017-02-24 19:40:40.276 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] -Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-02-24 19:40:42.007 [http-nio-8080-exec-1] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@14864ede]]]
+2017-02-24 19:40:42.014 [http-nio-8080-exec-1] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -==>  Preparing: SELECT * FROM user WHERE id=? 
+2017-02-24 19:40:42.054 [http-nio-8080-exec-1] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -==> Parameters: 1(Long)
+2017-02-24 19:40:42.138 [http-nio-8080-exec-1] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader -Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+2017-02-24 19:40:42.272 [http-nio-8080-exec-1] INFO  org.springframework.jdbc.support.SQLErrorCodesFactory -SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
+2017-02-24 19:40:42.328 [http-nio-8080-exec-1] ERROR org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet] -Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'id' in 'where clause'
+### The error may exist in cn/easywed/stargate/dao/mapper/UserMapper.xml
+### The error may involve cn.easywed.stargate.dao.mapper.UserMapper.findById-Inline
+### The error occurred while setting parameters
+### SQL: SELECT * FROM user WHERE id=?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'id' in 'where clause'
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'id' in 'where clause'] with root cause
+com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'id' in 'where clause'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_121]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) ~[na:1.8.0_121]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) ~[na:1.8.0_121]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) ~[na:1.8.0_121]
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:377) ~[mysql-connector-java-5.1.34.jar:5.1.34]
+	at com.mysql.jdbc.Util.getInstance(Util.java:360) ~[mysql-connector-java-5.1.34.jar:5.1.34]
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:978) ~[mysql-connector-java-5.1.34.jar:5.1.34]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3887) ~[mysql-connector-java-5.1.34.jar:5.1.34]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3823) ~[mysql-connector-java-5.1.34.jar:5.1.34]
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2435) ~[mysql-connector-java-5.1.34.jar:5.1.34]
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2582) ~[mysql-connector-java-5.1.34.jar:5.1.34]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2530) ~[mysql-connector-java-5.1.34.jar:5.1.34]
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1907) ~[mysql-connector-java-5.1.34.jar:5.1.34]
+	at com.mysql.jdbc.PreparedStatement.execute(PreparedStatement.java:1199) ~[mysql-connector-java-5.1.34.jar:5.1.34]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_121]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_121]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_121]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_121]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:55) ~[mybatis-3.2.3.jar:3.2.3]
+	at com.sun.proxy.$Proxy51.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:56) ~[mybatis-3.2.3.jar:3.2.3]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:70) ~[mybatis-3.2.3.jar:3.2.3]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:57) ~[mybatis-3.2.3.jar:3.2.3]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:259) ~[mybatis-3.2.3.jar:3.2.3]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:132) ~[mybatis-3.2.3.jar:3.2.3]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:105) ~[mybatis-3.2.3.jar:3.2.3]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:81) ~[mybatis-3.2.3.jar:3.2.3]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:104) ~[mybatis-3.2.3.jar:3.2.3]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:98) ~[mybatis-3.2.3.jar:3.2.3]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:62) ~[mybatis-3.2.3.jar:3.2.3]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_121]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_121]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_121]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_121]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:358) ~[mybatis-spring-1.2.2.jar:1.2.2]
+	at com.sun.proxy.$Proxy28.selectOne(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.selectOne(SqlSessionTemplate.java:163) ~[mybatis-spring-1.2.2.jar:1.2.2]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:63) ~[mybatis-3.2.3.jar:3.2.3]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:43) ~[mybatis-3.2.3.jar:3.2.3]
+	at com.sun.proxy.$Proxy44.findById(Unknown Source) ~[na:na]
+	at cn.easywed.stargate.service.impl.UserServiceImpl.getById(UserServiceImpl.java:19) ~[classes/:na]
+	at cn.easywed.stargate.controller.IndexController.hh(IndexController.java:28) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_121]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_121]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_121]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_121]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:777) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:706) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:943) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:877) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:966) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:857) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:618) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:842) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:725) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:77) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at cn.easywed.stargate.common.filter.LoginFilter.doFilter(LoginFilter.java:69) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:219) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:501) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:142) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:516) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1086) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:659) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.coyote.http11.Http11NioProtocol$Http11ConnectionHandler.process(Http11NioProtocol.java:223) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1558) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1515) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [na:1.8.0_121]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [na:1.8.0_121]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_121]
+2017-02-24 19:41:40.923 [http-nio-8080-exec-3] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@14864ede]]]
+2017-02-24 19:41:40.923 [http-nio-8080-exec-3] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -==>  Preparing: SELECT * FROM user WHERE id=? 
+2017-02-24 19:41:40.924 [http-nio-8080-exec-3] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -==> Parameters: 1(Long)
+2017-02-24 19:41:40.996 [http-nio-8080-exec-3] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -<==      Total: 1
+2017-02-24 19:41:41.008 [http-nio-8080-exec-3] ERROR org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet] -Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
+java.lang.NullPointerException: null
+	at cn.easywed.stargate.controller.IndexController.hh(IndexController.java:30) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_121]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_121]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_121]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_121]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:777) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:706) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:943) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:877) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:966) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:857) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:618) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:842) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:725) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:77) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at cn.easywed.stargate.common.filter.LoginFilter.doFilter(LoginFilter.java:69) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:219) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:501) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:142) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:516) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1086) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:659) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.coyote.http11.Http11NioProtocol$Http11ConnectionHandler.process(Http11NioProtocol.java:223) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1558) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1515) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [na:1.8.0_121]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [na:1.8.0_121]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_121]
+2017-02-24 19:41:42.518 [http-nio-8080-exec-5] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@14864ede]]]
+2017-02-24 19:41:42.518 [http-nio-8080-exec-5] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -==>  Preparing: SELECT * FROM user WHERE id=? 
+2017-02-24 19:41:42.519 [http-nio-8080-exec-5] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -==> Parameters: 1(Long)
+2017-02-24 19:41:42.521 [http-nio-8080-exec-5] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -<==      Total: 1
+2017-02-24 19:41:42.523 [http-nio-8080-exec-5] ERROR org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet] -Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
+java.lang.NullPointerException: null
+	at cn.easywed.stargate.controller.IndexController.hh(IndexController.java:30) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_121]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_121]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_121]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_121]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:777) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:706) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:943) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:877) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:966) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:857) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:618) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:842) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:725) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:77) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at cn.easywed.stargate.common.filter.LoginFilter.doFilter(LoginFilter.java:69) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:219) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:501) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:142) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:516) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1086) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:659) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.coyote.http11.Http11NioProtocol$Http11ConnectionHandler.process(Http11NioProtocol.java:223) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1558) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1515) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [na:1.8.0_121]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [na:1.8.0_121]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_121]
+2017-02-24 19:41:46.837 [http-nio-8080-exec-7] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -ooo Using Connection [ProxyConnection[PooledConnection[com.mysql.jdbc.JDBC4Connection@14864ede]]]
+2017-02-24 19:41:46.838 [http-nio-8080-exec-7] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -==>  Preparing: SELECT * FROM user WHERE id=? 
+2017-02-24 19:41:46.839 [http-nio-8080-exec-7] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -==> Parameters: 1(Long)
+2017-02-24 19:41:46.841 [http-nio-8080-exec-7] DEBUG cn.easywed.stargate.dao.mapper.UserMapper.findById -<==      Total: 1
+2017-02-24 19:41:46.843 [http-nio-8080-exec-7] ERROR org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet] -Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
+java.lang.NullPointerException: null
+	at cn.easywed.stargate.controller.IndexController.hh(IndexController.java:30) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_121]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_121]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_121]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_121]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:777) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:706) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:943) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:877) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:966) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:857) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:618) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:842) ~[spring-webmvc-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:725) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:77) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at cn.easywed.stargate.common.filter.LoginFilter.doFilter(LoginFilter.java:69) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.1.5.RELEASE.jar:4.1.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:219) ~[tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:501) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:142) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:516) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1086) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:659) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.coyote.http11.Http11NioProtocol$Http11ConnectionHandler.process(Http11NioProtocol.java:223) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1558) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1515) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [na:1.8.0_121]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [na:1.8.0_121]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.0.20.jar:8.0.20]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_121]
+2017-02-24 19:42:00.651 [main] INFO  cn.easywed.stargate.Application -Starting Application on Lenovo-PC with PID 12028 (D:\stargate\target\classes started by easywed in D:\stargate)
+2017-02-24 19:42:00.656 [main] DEBUG cn.easywed.stargate.Application -Running with Spring Boot v1.2.2.RELEASE, Spring v4.1.5.RELEASE
+2017-02-24 19:42:00.716 [main] INFO  org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext -Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@516be40f: startup date [Fri Feb 24 19:42:00 CST 2017]; root of context hierarchy
+2017-02-24 19:42:01.737 [main] INFO  org.springframework.beans.factory.support.DefaultListableBeanFactory -Overriding bean definition for bean 'beanNameViewResolver': replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class]]
+2017-02-24 19:42:02.563 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'dataSourceConfig' of type [class cn.easywed.stargate.config.DataSourceConfig$$EnhancerBySpringCGLIB$$5ababb97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:42:02.641 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'dataSource' of type [class org.apache.tomcat.jdbc.pool.DataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:42:02.720 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'sqlSessionFactory' of type [class org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:42:02.889 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'userMapper' of type [class org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:42:02.944 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$3b995e93] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:42:02.986 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'transactionAttributeSource' of type [class org.springframework.transaction.annotation.AnnotationTransactionAttributeSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:42:03.008 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'transactionInterceptor' of type [class org.springframework.transaction.interceptor.TransactionInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:42:03.022 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.config.internalTransactionAdvisor' of type [class org.springframework.transaction.interceptor.BeanFactoryTransactionAttributeSourceAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-24 19:42:03.956 [main] INFO  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer -Tomcat initialized with port(s): 8080 (http)
+2017-02-24 19:42:04.283 [main] INFO  org.apache.catalina.core.StandardService -Starting service Tomcat
+2017-02-24 19:42:04.286 [main] INFO  org.apache.catalina.core.StandardEngine -Starting Servlet Engine: Apache Tomcat/8.0.20
+2017-02-24 19:42:04.857 [localhost-startStop-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] -Initializing Spring embedded WebApplicationContext
+2017-02-24 19:42:05.901 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-02-24 19:42:05.902 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.FilterRegistrationBean -Mapping filter: 'loginFilter' to urls: [/*]
+2017-02-24 19:42:05.905 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-02-24 19:42:05.906 [localhost-startStop-1] INFO  org.springframework.boot.context.embedded.ServletRegistrationBean -Mapping servlet: 'dispatcherServlet' to [/]
+2017-02-24 19:42:06.833 [main] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter -Registering beans for JMX exposure on startup
+2017-02-24 19:42:07.014 [main] INFO  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer -Tomcat started on port(s): 8080 (http)
+2017-02-24 19:42:07.018 [main] INFO  cn.easywed.stargate.Application -Started Application in 6.817 seconds (JVM running for 7.775)

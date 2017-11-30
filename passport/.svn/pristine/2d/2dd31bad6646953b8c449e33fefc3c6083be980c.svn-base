@@ -1,0 +1,33 @@
+package cn.easywed.stargate.config;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import cn.easywed.stargate.common.redis.RedisService;
+import cn.easywed.stargate.common.redis.RedisServiceImpl;
+
+
+@Configuration
+public class RedisConfig {
+	
+//	@Value("${redis.addr}")
+//	private String redisAddr;
+//	@Value("${redis.maxActive}")
+//	private int maxActive;
+//	@Value("${redis.maxIdle}")
+//	private int maxIdle;
+//
+//	@Bean(name="redisService")
+//    public RedisService redisService()
+//    {
+//        RedisServiceImpl redis = new RedisServiceImpl();
+//        redis.setRedisAddr(redisAddr);
+//        redis.setMaxActive(maxActive);
+//        redis.setMaxIdle(maxIdle);
+//        
+//        redis.init();
+//        
+//        return redis;
+//    }
+}

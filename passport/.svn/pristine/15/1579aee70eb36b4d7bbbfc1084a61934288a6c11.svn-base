@@ -1,0 +1,438 @@
+package cn.easywed.stargate.controller;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.easywed.stargate.common.util.JsonUtil;
+import cn.easywed.stargate.common.util.MD5Util;
+import cn.easywed.stargate.dao.persistence.Department;
+import cn.easywed.stargate.dao.persistence.RUserRole;
+import cn.easywed.stargate.dao.persistence.Role;
+import cn.easywed.stargate.dao.persistence.User;
+import cn.easywed.stargate.service.IDepartmentService;
+import cn.easywed.stargate.service.IRerationService;
+import cn.easywed.stargate.service.IRoleService;
+import cn.easywed.stargate.service.IUserService;
+
+@RequestMapping("/")
+@Controller
+public class UserController {
+
+	@Resource
+	IUserService userService;
+
+	@Resource
+	IRoleService roleService;
+
+	@Resource
+	IDepartmentService departmentService;
+
+	@Resource
+	IRerationService rerationService;
+
+	public static Logger logger = LoggerFactory.getLogger(UserController.class);
+
+	@RequestMapping(value = "/getUsers", method = { RequestMethod.POST })
+	@ResponseBody
+	public String getUsers(String username, String departId, String isvalid,int pageNo, int pageSize) {
+
+		logger.info("username:{},departId:{}, isvalid:{}", username, departId, isvalid);
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 0);
+		retMap.put("msg", "ok");
+		Map<String, Object> condition = new HashMap<String, Object>();
+
+		condition.put("username", username);
+		condition.put("department", departId);
+		condition.put("isvalid", isvalid);
+
+		int totalCnt=userService.queryUserListCountByConditions(condition);
+		List<User> userList=userService.queryUserListByConditions(condition, pageNo, pageSize);
+		
+		List<Object> resultList = new ArrayList<Object>();
+
+		for (int i = 0; i < userList.size(); i++) {
+			// 用户表示信息封装
+			Map<String, Object> userMap = new HashMap<String, Object>();
+			userMap.put("id", userList.get(i).getId());
+			userMap.put("username", userList.get(i).getUsername());
+			// 获取用户角色 getbyUid
+			List<RUserRole> ruserRole = rerationService.getByUId(userList.get(i).getId());
+			if (ruserRole != null) {
+				// 查询关联角色
+				List<Object> roleList = new ArrayList<Object>();
+				for (int j = 0; j < ruserRole.size(); j++) {
+
+					Role role = roleService.getById(ruserRole.get(j).getRoleId());
+					Map<String, Object> roleMap = new HashMap<String, Object>();
+					roleMap.put("roleId", role.getRoleId());
+					roleMap.put("roleName", role.getRoleName());
+					roleList.add(roleMap);
+				}
+
+				userMap.put("roles", roleList);
+
+			} else {
+				userMap.put("roles", null);
+			}
+
+			// 部门信息
+			Department department = departmentService.getDepartmentById(userList.get(i).getDepartment());
+			if (department != null) {
+				Map<String,Object> departMap = new HashMap<String,Object>();
+				departMap.put("deId", department.getId());
+				departMap.put("deName", department.getDeName());
+				userMap.put("department", departMap);
+			} else {
+				userMap.put("department", null);
+			}
+
+			userMap.put("mobile", userList.get(i).getMobile());
+			userMap.put("isvalid", userList.get(i).getIsvalid());
+
+			Date dateTime = userList.get(i).getCreattime();
+			if (dateTime != null) {
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+				String dateString = formatter.format(dateTime);
+				userMap.put("createtime", dateString);
+			} else {
+				userMap.put("createtime", null);
+			}
+			resultList.add(userMap);
+
+		}
+
+		// 获取部门
+		List<Department> department = departmentService.getDepartment(new HashMap<String,Object>());
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("userList", resultList);
+		dataMap.put("cnt", totalCnt);
+		dataMap.put("department", department);
+
+		retMap.put("data", dataMap);
+		return JsonUtil.toJson(retMap);
+
+	}
+	
+	//TODO 获取下属
+	@RequestMapping(value = "/getSubordinate", method = { RequestMethod.POST })
+	@ResponseBody
+	public String getSubordinate(String uid,int pageNo, int pageSize) {
+
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 0);
+		retMap.put("msg", "ok");
+		Map<String, Object> condition = new HashMap<String, Object>();
+
+		
+		retMap.put("data", null);
+		return JsonUtil.toJson(retMap);
+
+	}
+
+	/**
+	 * 路由页
+	 * 
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/getBaseInfo")
+	@ResponseBody
+	public String getBaseInfo(HttpServletRequest request, HttpSession session) {
+
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 0);
+		retMap.put("msg", "ok");
+		List<Role> roles = roleService.getRoles(new HashMap<String,Object>());
+
+		List<Department> department = departmentService.getDepartment(new HashMap<String,Object>());
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("roles", roles);
+		dataMap.put("department", department);
+		retMap.put("data", dataMap);
+
+		return JsonUtil.toJson(retMap);
+	}
+
+	/**
+	 * 注册 POST
+	 * 
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/register", method = { RequestMethod.POST })
+	@ResponseBody
+	public String register(String username, String mobile, String password, String departId, String roles) {
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 0);
+		retMap.put("msg", "ok");
+
+		User user = new User();
+		user.setUsername(username);
+		user.setMobile(mobile);
+		String pw = MD5Util.MD5(password);
+		user.setPassword(pw);
+		// throw exception
+		if (departId != null && !"".equals(departId)) {
+			user.setDepartment(Integer.parseInt(departId));
+		}
+
+		Date date = new Date();
+		user.setCreattime(date);
+
+		user.setStatus(0);
+		user.setIsvalid(0);
+
+		// 注册新用户
+		int ret = userService.register(user);
+		if (ret == 0) {
+			retMap.put("code", 1);
+			retMap.put("msg", "insert user failed");
+		}
+
+		// 为新用户绑定角色
+		long uid = user.getId();
+
+		String role[] = null;
+		// 为新用户绑定角色
+		if (roles != null && !"".equals(roles)) {
+			role = roles.split(",");
+		}
+
+		RUserRole rUserRole = new RUserRole();
+		rUserRole.setUid(uid);
+
+		if (role != null && !"".equals(role)) {
+
+			for (int i = 0; i < role.length; i++) {
+
+				rUserRole.setRoleId(Integer.valueOf(role[i]));
+				rerationService.addUserRole(rUserRole);
+			}
+
+		}
+
+		// 用户表示信息封装
+		Map<String, Object> userMap = new HashMap<String, Object>();
+		userMap.put("id", uid);
+		userMap.put("username", user.getUsername());
+		// 获取用户角色 getbyUid
+		List<RUserRole> ruserRole = rerationService.getByUId(uid);
+		if (ruserRole != null) {
+			// 查询关联角色
+			List<Object> roleList = new ArrayList<Object>();
+			for (int j = 0; j < ruserRole.size(); j++) {
+
+				Role userRole = roleService.getById(ruserRole.get(j).getRoleId());
+				Map<String, Object> roleMap = new HashMap<String, Object>();
+				roleMap.put("roleId", userRole.getRoleId());
+				roleMap.put("roleName", userRole.getRoleName());
+				roleList.add(roleMap);
+			}
+
+			userMap.put("roles", roleList);
+
+		} else {
+			userMap.put("roles", null);
+		}
+
+		// 部门信息
+		Department department = departmentService.getDepartmentById(user.getDepartment());
+		if (department != null) {
+			Map<String,Object> departMap = new HashMap<String,Object>();
+			departMap.put("deId", department.getId());
+			departMap.put("deName", department.getDeName());
+			userMap.put("department", departMap);
+		} else {
+			userMap.put("department", null);
+		}
+
+		userMap.put("mobile", user.getMobile());
+		userMap.put("isvalid", user.getIsvalid());
+
+		Date dateTime = user.getCreattime();
+		if (dateTime != null) {
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+			String dateString = formatter.format(dateTime);
+			userMap.put("createtime", dateString);
+		} else {
+			userMap.put("createtime", null);
+		}
+		// 返回插入结果
+    	retMap.put("userInfo", userMap);
+
+		return JsonUtil.toJson(retMap);
+
+	}
+
+	/**
+	 * 修改密码 POST
+	 * 
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/changePassword", method = { RequestMethod.POST })
+	public String changePassword(String oldPassword, String mobile, String newPassword) {
+
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 0);
+		retMap.put("msg", "修改密码成功");
+
+		try {
+			// 验证旧用户密码
+			User userInfo = userService.getUserInfo(mobile, oldPassword);
+			if (userInfo == null) {
+				retMap.put("code", 1);
+				retMap.put("msg", "mobile password is wrong");
+				return JsonUtil.toJson(retMap);
+			}
+			// 更新密码
+			User user = new User();
+			user.setMobile(mobile);
+			String password = MD5Util.MD5(newPassword);
+			user.setPassword(password);
+			userService.updateUser(user);
+
+		} catch (NumberFormatException e) {
+			retMap.put("code", 4);
+			retMap.put("msg", "input param error");
+			return JsonUtil.toJson(retMap);
+		}
+
+		return JsonUtil.toJson(retMap);
+
+	}
+
+	/**
+	 * 
+	 * @param username
+	 * @param mobile
+	 * @param password
+	 * @param departId
+	 * @param roles
+	 * @return
+	 */
+	@RequestMapping(value = "/updateUser", method = { RequestMethod.POST })
+	@ResponseBody
+	public String updateUser(String userId, String username, String mobile, String departId, String roles) {
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 0);
+		retMap.put("msg", "ok");
+
+		User user = new User();
+		if (userId == null && "".equals(userId)) {
+			retMap.put("code", 4);
+			retMap.put("msg", "parameta error");
+		}
+		int uid = Integer.parseInt(userId);
+		user.setId(uid);
+		user.setUsername(username);
+		user.setMobile(mobile);
+		if (departId != null && !"".equals(departId)) {
+			user.setDepartment(Integer.parseInt(departId));
+		}
+
+		// 更新
+		int ret = userService.updateUser(user);
+		if (ret == 0) {
+			retMap.put("code", 1);
+			retMap.put("msg", "update user failed");
+		}
+		
+		//获取更新完的数据，显示用
+		user=userService.getById(uid);
+
+		String role[] = null;
+		// 为新用户绑定角色
+		if (roles != null && !"".equals(roles)) {
+			role = roles.split(",");
+		}
+
+		RUserRole rUserRole = new RUserRole();
+		rUserRole.setUid(uid);
+
+		// 删除旧角色
+		rerationService.deleteRolebyUid(uid);
+
+		if (role != null && !"".equals(role)) {
+			for (int i = 0; i < role.length; i++) {
+
+				// 添加新角色
+				rUserRole.setRoleId(Integer.valueOf(role[i]));
+				rerationService.addUserRole(rUserRole);
+			}
+		}
+
+		
+		// 用户表示信息封装
+		Map<String, Object> userMap = new HashMap<String, Object>();
+		userMap.put("id", uid);
+		userMap.put("username", user.getUsername());
+		// 获取用户角色 getbyUid
+		List<RUserRole> ruserRole = rerationService.getByUId(uid);
+		if (ruserRole != null) {
+			// 查询关联角色
+			List<Object> roleList = new ArrayList<Object>();
+			for (int j = 0; j < ruserRole.size(); j++) {
+
+				Role userRole = roleService.getById(ruserRole.get(j).getRoleId());
+				Map<String, Object> roleMap = new HashMap<String, Object>();
+				roleMap.put("roleId", userRole.getRoleId());
+				roleMap.put("roleName", userRole.getRoleName());
+				roleList.add(roleMap);
+			}
+
+			userMap.put("roles", roleList);
+
+		} else {
+			userMap.put("roles", null);
+		}
+
+		// 部门信息
+		Department department = departmentService.getDepartmentById(user.getDepartment());
+		if (department != null) {
+			Map<String,Object> departMap = new HashMap<String,Object>();
+			departMap.put("deId", department.getId());
+			departMap.put("deName", department.getDeName());
+			userMap.put("department", departMap);
+		} else {
+			userMap.put("department", null);
+		}
+
+		userMap.put("mobile", user.getMobile());
+		userMap.put("isvalid", user.getIsvalid());
+
+		Date dateTime = user.getCreattime();
+		if (dateTime != null) {
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+			String dateString = formatter.format(dateTime);
+			userMap.put("createtime", dateString);
+		} else {
+			userMap.put("createtime", null);
+		}
+		
+		
+		retMap.put("userInfo", userMap);
+		
+		return JsonUtil.toJson(retMap);
+
+	}
+
+}

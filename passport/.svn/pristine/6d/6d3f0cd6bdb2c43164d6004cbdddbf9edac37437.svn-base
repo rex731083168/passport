@@ -1,0 +1,11 @@
+package cn.easywed.stargate.dao.mapper;
+
+import java.util.List;
+
+import cn.easywed.stargate.dao.persistence.SysInfo;
+
+public interface SysInfoMapper {
+		
+	List<SysInfo> getSysInfo();
+
+}

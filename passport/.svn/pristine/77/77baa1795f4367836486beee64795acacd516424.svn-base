@@ -1,0 +1,29 @@
+package cn.easywed.stargate.dao.mapper;
+
+
+import java.util.List;
+import java.util.Map;
+
+import cn.easywed.stargate.dao.persistence.User;
+
+public interface UserMapper {
+
+	public User findById(long uid);
+	
+	public int register(User user);
+
+	public List<User> getUsers(Map condition);
+		
+	public	int updateUser(User user);
+		
+	public	User getUserInfo(User user);
+		
+	public	int logout(long uid);
+	
+    int queryUserListCountByConditions(Map<String, Object> map);
+
+    List<User> queryUserListByConditions(Map<String, Object> map);
+    
+//	List<User> getByparentId(long parentId);
+
+}

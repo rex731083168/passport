@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.easywed.stargate.dao.mapper.RoleMapper">
+	<resultMap type="cn.easywed.stargate.dao.persistence.Role" id="roleMap">
+		<id column="role_id" property="roleId" />
+		<id column="role_name" property="roleName" />
+		<id column="description" property="description" />
+		<id column="create_time" property="createTime" />
+	</resultMap>
+	
+
+	<select id="getRoles" parameterType="java.util.HashMap" resultMap="roleMap" >
+		SELECT * FROM role WHERE  1=1 
+        <if test="roleName!=null and roleName!=''">  
+        AND role_name = #{roleName}  
+        </if>   
+        <if test="beganDate!=null and beganDate!=''">  
+        AND create_time &gt;= #{beganDate}  
+        </if>   
+         <if test="endDate!=null and endDate!=''">  
+        AND create_time &lt;= #{endDate}  
+        </if>   
+	</select>
+	
+	<insert id="addRole" useGeneratedKeys="true" keyProperty="role_id"
+		parameterType="cn.easywed.stargate.dao.persistence.Role">
+		INSERT INTO role(role_name,description,create_time) 
+		VALUES(
+		#{roleName},
+		#{description},
+		#{createTime}
+		)
+	</insert>
+	
+	<select id="getById" resultMap="roleMap" parameterType="long">
+		SELECT * FROM role WHERE 
+		role_id = #{roleId}
+	</select>
+	
+	<update id="updateRole" 
+		parameterType="cn.easywed.stargate.dao.persistence.Role">
+		UPDATE role SET role_name = #{roleName}  ,
+						description = #{description}
+		WHERE
+		    role_id=#{roleId}
+		    
+	</update>
+	
+	
+	
+</mapper>

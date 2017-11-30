@@ -1,0 +1,313 @@
+package cn.easywed.stargate.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.easywed.stargate.common.util.JsonUtil;
+import cn.easywed.stargate.common.util.MD5Util;
+import cn.easywed.stargate.dao.persistence.Auth;
+import cn.easywed.stargate.dao.persistence.RRoleAuth;
+import cn.easywed.stargate.dao.persistence.RUserRole;
+import cn.easywed.stargate.dao.persistence.Role;
+import cn.easywed.stargate.dao.persistence.User;
+import cn.easywed.stargate.service.IAuthService;
+import cn.easywed.stargate.service.IRerationService;
+import cn.easywed.stargate.service.IRoleService;
+import cn.easywed.stargate.service.ISessionService;
+import cn.easywed.stargate.service.IUserService;
+
+@RequestMapping("/")
+@Controller
+public class AppController {
+
+	@Resource
+	IUserService userService;
+
+	@Resource
+	IRerationService rerationService;
+
+	@Resource
+	IRoleService roleService;
+
+	@Resource
+	IAuthService authService;
+
+	@Resource
+	ISessionService sessionService;
+
+	public static Logger logger = LoggerFactory.getLogger(AppController.class);
+
+	/**
+	 * 登出
+	 * 
+	 * @param uid
+	 * @return
+	 */
+	@RequestMapping(value = "/logout")
+	@ResponseBody
+	public String logout(@RequestParam(required = true, value = "") long uid) {
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 200);
+		retMap.put("msg", "ok");
+		// 清除session
+		sessionService.getSession(uid);
+		return JsonUtil.toJson(retMap);
+
+	}
+
+	/**
+	 * 登录
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/login")
+	@ResponseBody
+	public String login1(HttpServletRequest request, @RequestParam(required = true, value = "mobile") String mobile,
+			@RequestParam(required = true, value = "password") String password) {
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 200);
+		retMap.put("msg", "ok");
+		if (mobile == null && "".equals(mobile)) {
+			retMap.put("code", 203);
+			retMap.put("msg", "parameta error");
+		}
+		if (password == null && "".equals(password)) {
+			retMap.put("code", 203);
+			retMap.put("msg", "parameta error");
+		}
+
+		String pw = MD5Util.MD5(password);
+
+		User userInfo = userService.getUserInfo(mobile, pw);
+		if (userInfo == null) {
+			retMap.put("code", 202);
+			retMap.put("msg", "mobile password is wrong");
+			return JsonUtil.toJson(retMap);
+		}
+
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("userInfo", userInfo);
+
+		String ticket = sessionService.getSession(userInfo.getId());
+		// 生成ticket
+		dataMap.put("ticket", ticket);
+		retMap.put("data", dataMap);
+		return JsonUtil.toJson(retMap);
+
+	}
+
+	/**
+	 * 获取用户角色ids
+	 *
+	 * @param uid
+	 * @return
+	 */
+	@RequestMapping(value = "/getRoleIdsByUid")
+	@ResponseBody
+	public String getRoleIdsByUid(HttpServletRequest request, @RequestParam(required = true, value = "uid") Long uid) {
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 200);
+		retMap.put("msg", "ok");
+
+		// 获取角色列表
+		List<RUserRole> rUserRoles = rerationService.getByUId(uid);
+
+		List<Object> roleids = new ArrayList<Object>();
+
+		for (int i = 0; i < rUserRoles.size(); i++) {
+			roleids.add(rUserRoles.get(i).getRoleId());
+
+		}
+
+		retMap.put("data", roleids);
+		return JsonUtil.toJson(retMap);
+
+	}
+
+	/**
+	 * 验证是否已登录
+	 * 
+	 * @param ticket
+	 * @return
+	 */
+	@RequestMapping(value = "/checkTicket")
+	@ResponseBody
+	public String checkTicket(HttpServletRequest request,
+			@RequestParam(required = true, value = "ticket") String ticket) {
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 200);
+		retMap.put("msg", "ok");
+		if (ticket == null && "".equals(ticket)) {
+			retMap.put("code", 203);
+			retMap.put("msg", "parameta error");
+			return JsonUtil.toJson(retMap);
+		}
+
+		// 验证是否过期
+		boolean flag = sessionService.checkSession(ticket);
+
+		if (flag == false) {
+			retMap.put("code", 202);
+			retMap.put("msg", "login time out");
+			return JsonUtil.toJson(retMap);
+		}
+
+		long uid = sessionService.getUidbyTicket(ticket);
+		retMap.put("data", uid);
+
+		return JsonUtil.toJson(retMap);
+
+	}
+
+	/**
+	 * 
+	 * @param roleId
+	 * @return
+	 */
+	@RequestMapping("/getUserListbyRole")
+	@ResponseBody
+	public String getUserListbyRole(String roleId) {
+
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 200);
+		retMap.put("msg", "ok");
+		long roleid = Integer.parseInt(roleId);
+
+		List<Map<String, Object>> userList = new ArrayList<Map<String, Object>>();
+
+		long uid = 0;
+		List<RUserRole> rUserRole = rerationService.getUidbyRole(roleid);
+		if (rUserRole != null && rUserRole.size() > 0) {
+			for (int i = 0; i < rUserRole.size(); i++) {
+				uid = rUserRole.get(i).getUid();
+				// 获取用户详情
+				User user = userService.getById(uid);
+				Map<String, Object> userMap = new HashMap<String, Object>();
+				if (user != null) {
+					userMap.put("uid", uid);
+					userMap.put("name", user.getUsername());
+					userMap.put("img", user.getHeadimg());
+					userList.add(userMap);
+				}
+				
+			}
+		}
+		retMap.put("data", userList);
+		return JsonUtil.toJson(retMap);
+
+	}
+
+	/**
+	 * 
+	 * @param roleId
+	 * @param userName
+	 * @return
+	 */
+	@RequestMapping("/getUserListbyRoleAndName")
+	@ResponseBody
+	public String getUserListbyRoleAndName(String roleId, @RequestParam(required = false) String name) {
+
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 200);
+		retMap.put("msg", "ok");
+		long roleid = Integer.parseInt(roleId);
+
+		List<Map<String, Object>> userList = new ArrayList<Map<String, Object>>();
+
+		long uid = 0;
+		List<RUserRole> rUserRole = rerationService.getUidbyRole(roleid);
+		if (rUserRole != null && rUserRole.size() > 0) {
+			for (int i = 0; i < rUserRole.size(); i++) {
+				uid = rUserRole.get(i).getUid();
+				// 获取用户详情
+				User user = userService.getById(uid);
+				Map<String, Object> userMap = new HashMap<String, Object>();
+				if (user != null && user.getUsername().indexOf(name) > -1) {
+
+					userMap.put("uid", uid);
+					userMap.put("name", user.getUsername());
+					userMap.put("img", user.getHeadimg());
+					userList.add(userMap);
+				}
+
+			}
+		}
+		retMap.put("data", userList);
+		return JsonUtil.toJson(retMap);
+
+	}
+
+	/**
+	 * 获取用户对应权限 返回各个平台值
+	 * 
+	 * @param uid
+	 * @param sid
+	 * @return
+	 */
+	@RequestMapping(value = "/getAuthsbyUid")
+	@ResponseBody
+	public String getbyTicket(HttpServletRequest request, @RequestParam(required = true, value = "uid") Long uid,
+			long sid) {
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("code", 200);
+		retMap.put("msg", "ok");
+
+		User userInfo = userService.getById(uid);
+		if (userInfo == null) {
+			retMap.put("code", 202);
+			retMap.put("msg", "none user was found");
+			return JsonUtil.toJson(retMap);
+		}
+
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("userInfo", userInfo);
+
+		// 获取角色列表
+		List<RUserRole> rUserRoles = rerationService.getByUId(uid);
+		// 角色
+		List<Role> roleList = new ArrayList<Role>();
+		// 权限
+		List<Auth> authList = new ArrayList<Auth>();
+
+		List<Object> roleids = new ArrayList<Object>();
+
+		for (int i = 0; i < rUserRoles.size(); i++) {
+			roleids.add(rUserRoles.get(i).getRoleId());
+			// 获取角色
+			Role role = roleService.getById(rUserRoles.get(i).getRoleId());
+			roleList.add(role);
+
+		}
+		// 根据roleids获取对应系统权限列表
+		if (roleids.size() > 0) {
+			List<RRoleAuth> rroleAuth = rerationService.getByRoleIds(roleids);
+			// 获取权限列表
+			for (int i = 0; i < rroleAuth.size(); i++) {
+				// 获取权限详情
+				Auth auth = authService.getByIdSid(rroleAuth.get(i).getAuthId(), sid);
+				if (auth != null) {
+					authList.add(auth);
+				}
+			}
+
+		}
+		dataMap.put("role", roleList);
+		dataMap.put("auth", authList);
+		retMap.put("data", dataMap);
+		return JsonUtil.toJson(retMap);
+
+	}
+}

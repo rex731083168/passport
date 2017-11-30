@@ -1,0 +1,24 @@
+# PROFILES
+## dev | prod | test | vm
+spring.profiles.active=vm
+
+# EMBEDDED SERVER CONFIGURATION (ServerProperties)
+server.port=8080
+#server.session-timeout=30
+server.context-path=
+server.tomcat.max-threads=0
+server.tomcat.uri-encoding=UTF-8
+
+
+# SPRING MVC (WebMvcProperties)
+spring.mvc.locale= zh_CN
+#spring.mvc.date-format= dd/MM/yyyy # set fixed date format, e.g. dd/MM/yyyy
+spring.mvc.favicon.enabled=true
+#spring.mvc.message-codes-resolver-format= # PREFIX_ERROR_CODE / POSTFIX_ERROR_CODE
+#spring.mvc.ignore-default-model-on-redirect=true # If the the content of the "default" model should be ignored redirects
+spring.view.prefix: /WEB-INF/jsp/
+spring.view.suffix: .jsp
+
+
+#print sql statement
+logging.level.cn.easywed.stargate.dao.mapper: DEBUG

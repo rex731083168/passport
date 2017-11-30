@@ -1,0 +1,21 @@
+# configuration for development environment
+
+# datasource
+datasource.driverClass: com.mysql.jdbc.Driver
+datasource.jdbcUrl: jdbc:mysql://rdsauqmnfy6ja6n.mysql.rds.aliyuncs.com:3306/easywed_user?useUnicode=true&characterEncoding=UTF-8
+datasource.user: ewd4prodxf
+datasource.password: odxfny_mkeD
+datasource.initialPoolSize: 5
+datasource.acquireIncrement: 10
+datasource.maxPoolSize: 500
+
+ redis
+redis.addr=127.0.0.1:10024
+redis.maxActive=100
+redis.maxIdle=10
+redis.password=easywed.cn.redis
+
+# 
+sid=stargate
+
+

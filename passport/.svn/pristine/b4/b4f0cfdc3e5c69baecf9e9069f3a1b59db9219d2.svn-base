@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.easywed.stargate.dao.mapper.DepartmentMapper">
+	<resultMap type="cn.easywed.stargate.dao.persistence.Department" id="departmentMap">
+		<id column="id" property="id" />
+		<id column="deName" property="deName" />
+		<id column="description" property="description" />
+		<id column="create_time" property="createTime" />
+	</resultMap>
+	
+
+	
+	<select id="getDepartment" resultMap="departmentMap" >
+		SELECT * FROM department 
+	</select>
+	
+	<select id="getDepartmentById" resultMap="departmentMap" parameterType="long">
+		SELECT * FROM department 
+        WHERE 
+           id= #{userId}
+	</select>
+	
+	
+</mapper>

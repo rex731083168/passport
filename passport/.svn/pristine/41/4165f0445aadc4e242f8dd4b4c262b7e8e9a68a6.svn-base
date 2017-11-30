@@ -1,0 +1,13 @@
+package cn.easywed.stargate.service;
+
+import java.util.List;
+
+import cn.easywed.stargate.dao.persistence.Department;
+
+public interface IDepartmentService {
+		
+	
+	//批量查询部门
+	List<Department> getDepartment();
+
+}

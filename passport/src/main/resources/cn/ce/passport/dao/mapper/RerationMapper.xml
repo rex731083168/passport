@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ce.passport.dao.mapper.RerationMapper">
+	<resultMap type="cn.ce.passport.dao.persistence.RUserRole" id="userRoleMap">
+		<id column="ur_id" property="id" />
+		<id column="uid" property="uid" />
+		<id column="role_id" property="roleId" />
+	</resultMap>
+	
+	<resultMap type="cn.ce.passport.dao.persistence.RRoleAuth" id="roleAuthMap">
+		<id column="ra_id" property="id" />
+		<id column="role_id" property="roleId" />
+		<id column="auth_id" property="authId" />
+	</resultMap>
+	
+	
+	<select id="getByUId" resultMap="userRoleMap" parameterType="long">
+		SELECT * FROM r_userrole WHERE 
+		uid = #{uid}
+	</select>
+	
+	<select id="getByRoleId" resultMap="roleAuthMap" parameterType="long">
+		SELECT * FROM r_roleauth WHERE 
+		role_id = #{roleId}
+	</select>
+	
+	<select id="getByRoleIds" resultMap="roleAuthMap" >
+		 SELECT DISTINCT t.auth_id FROM r_roleauth t WHERE  role_id in
+ 		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+  		#{item}  
+        </foreach>  
+	</select>
+	
+	<insert id="addUserRole" useGeneratedKeys="true" keyProperty="ur_id"
+		parameterType="cn.ce.passport.dao.persistence.RUserRole">
+		INSERT INTO r_userrole(uid,role_id) 
+		VALUES(
+		#{uid},
+		#{roleId}
+		)
+	</insert>
+	
+	
+	<insert id="addRoleAuth" useGeneratedKeys="true" keyProperty="ra_id"
+		parameterType="cn.ce.passport.dao.persistence.RRoleAuth">
+		INSERT INTO r_roleauth(role_id,auth_id) 
+		VALUES(
+		#{roleId},
+		#{authId}
+		)
+	</insert>
+	
+	
+	<delete id="deleteRolebyUid"  parameterType="long">
+		DELETE FROM  r_userrole WHERE 
+		uid = #{uid}
+	</delete>	
+	
+	<delete id="deleteAuthbyRoleId"  parameterType="long">
+		DELETE FROM  r_roleauth WHERE 
+		role_id = #{roleId}
+	</delete>	
+	
+	<select id="getUidbyRole" resultMap="userRoleMap" parameterType="long">
+		SELECT * FROM r_userrole WHERE 
+		role_id = #{roleId}
+	</select>
+</mapper>

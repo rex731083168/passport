@@ -1,0 +1,35 @@
+package cn.easywed.stargate.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import cn.easywed.stargate.dao.mapper.DepartmentMapper;
+import cn.easywed.stargate.dao.persistence.Department;
+import cn.easywed.stargate.service.IDepartmentService;;
+
+@Service("departmentService")
+public class DepartmentServiceImpl implements IDepartmentService {
+
+	@Resource
+	DepartmentMapper departmentMapper;
+	
+
+	@Override
+	public List<Department> getDepartment(Map condition) {
+		return departmentMapper.getDepartment(condition);
+	}
+
+
+	@Override
+	public Department getDepartmentById(int userId) {
+		return departmentMapper.getDepartmentById(userId);
+	}
+
+
+	
+
+}
