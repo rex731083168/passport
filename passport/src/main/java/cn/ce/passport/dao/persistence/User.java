@@ -5,16 +5,32 @@ import java.util.Date;
 public class User {
 
 	private long id;
-	private String username;
+	private String userName;
 	private String password;
-	private String nickname;
-	private String headimg;
-	private String mobile;
 	private String email;
-	private Date creattime;
-	private int status;
-	private int isvalid;
+	private String telNumber;
+	private Date regTime;
+	/** 组织机构编码,标识当前用户的组织 */
+	private String orgId;
+	/** 组织机构名称 冗余字段 */
+	private String orgName;
+	/** 状态 0:禁用，1:启用 */
+	private int state;
+	/** 用户类型 0:管理员，1:普通用户，2:提供者 */
+	private int userType;
+	/** 审核状态0:初始，1:提交审核，2:通过，3:未通过 */
+	private int checkState;
+	/** 审核备注 */
+	private String checkMem;
+	/******************** 认证时需要的信息 ************************/
+	/** 企业名称 */
+	private String enterpriseName; //
+	/** 身份证号码 */
+	private String idCard;
+	/** 真实姓名 */
+	private String userRealName;
 
+	/******************** 认证时需要的信息 ************************/
 	public long getId() {
 		return id;
 	}
@@ -23,12 +39,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPassword() {
@@ -39,30 +55,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getHeadimg() {
-		return headimg;
-	}
-
-	public void setHeadimg(String headimg) {
-		this.headimg = headimg;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -71,28 +63,92 @@ public class User {
 		this.email = email;
 	}
 
-	public Date getCreattime() {
-		return creattime;
+	public String getTelNumber() {
+		return telNumber;
 	}
 
-	public void setCreattime(Date creattime) {
-		this.creattime = creattime;
+	public void setTelNumber(String telNumber) {
+		this.telNumber = telNumber;
 	}
 
-	public int getStatus() {
-		return status;
+	public Date getRegTime() {
+		return regTime;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
+	public void setRegTime(Date regTime) {
+		this.regTime = regTime;
 	}
 
-	public int getIsvalid() {
-		return isvalid;
+	public String getOrgId() {
+		return orgId;
 	}
 
-	public void setIsvalid(int isvalid) {
-		this.isvalid = isvalid;
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
+	}
+
+	public String getOrgName() {
+		return orgName;
+	}
+
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public int getUserType() {
+		return userType;
+	}
+
+	public void setUserType(int userType) {
+		this.userType = userType;
+	}
+
+	public int getCheckState() {
+		return checkState;
+	}
+
+	public void setCheckState(int checkState) {
+		this.checkState = checkState;
+	}
+
+	public String getCheckMem() {
+		return checkMem;
+	}
+
+	public void setCheckMem(String checkMem) {
+		this.checkMem = checkMem;
+	}
+
+	public String getEnterpriseName() {
+		return enterpriseName;
+	}
+
+	public void setEnterpriseName(String enterpriseName) {
+		this.enterpriseName = enterpriseName;
+	}
+
+	public String getIdCard() {
+		return idCard;
+	}
+
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
+	}
+
+	public String getUserRealName() {
+		return userRealName;
+	}
+
+	public void setUserRealName(String userRealName) {
+		this.userRealName = userRealName;
 	}
 
 }

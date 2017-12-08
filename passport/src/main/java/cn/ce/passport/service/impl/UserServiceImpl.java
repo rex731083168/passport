@@ -41,9 +41,9 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public User getUserInfo(String username, String password) {
+	public User getUserInfo(String userName, String password) {
 		User user = new User();
-		user.setUsername(username);
+		user.setUserName(userName);
 		user.setPassword(password);
 		return userMapper.getUserInfo(user);
 	}
@@ -55,9 +55,9 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public int checkPassword(String mobile, String password) {
+	public int checkPassword(String telNumber, String password) {
 		User user = new User();
-		user.setMobile(mobile);
+		user.setTelNumber(telNumber);
 		user.setPassword(password);
 		User res = new User();
 		res = userMapper.getUserInfo(user);

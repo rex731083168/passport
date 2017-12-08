@@ -4,23 +4,23 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import cn.ce.passport.common.redis.RedisService;
+import cn.ce.passport.common.redis.RedisClusterService;
 import cn.ce.passport.common.util.AESUtil;
-import cn.ce.passport.service.ISessionService;;
+import cn.ce.passport.service.ISessionService;
 
 @Service("sessionService")
 public class SessionService implements ISessionService {
 
 	@Resource
-	RedisService redis;
+	RedisClusterService redis;
 
 	@Override
-	public String getSession(long uid) {
+	public String setSession(long uid) {
 		// uid 加密 ；存到redis
 		String sessionId = AESUtil.getInstance().encrypt(String.valueOf(uid));
 		redis.set(sessionId, "exist", 7 * 24 * 60 * 60);
 		return sessionId;
-		// return null;
+
 	}
 
 	@Override
@@ -30,7 +30,6 @@ public class SessionService implements ISessionService {
 			return false;
 		}
 		return true;
-		// return true;
 
 	}
 
@@ -40,7 +39,7 @@ public class SessionService implements ISessionService {
 		String uidStr = AESUtil.getInstance().decrypt(ticket);
 		long uid = Long.valueOf(uidStr);
 		return uid;
-		// return 0;
+
 	}
 
 	@Override
@@ -48,6 +47,32 @@ public class SessionService implements ISessionService {
 		String sessionId = AESUtil.getInstance().encrypt(String.valueOf(uid));
 		redis.del(sessionId);
 		return sessionId;
+	}
+
+	@Override
+	public String getEmailSession(String email) {
+		String emailkey = AESUtil.getInstance().encrypt(email);
+		redis.set(emailkey, "exist", 1800);
+		return emailkey;
+	}
+
+	@Override
+	public String getEmail(String emailkey) {
+		// 解密出email
+		String email = AESUtil.getInstance().decrypt(emailkey);
+
+		return email;
+	}
+
+	@Override
+	public String setCode(long code) {
+		return redis.set(String.valueOf(code), "exist", 3 * 60);
+	}
+
+	@Override
+	public String getCode(String code) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -26,7 +26,7 @@ public interface IUserService {
 	int logout(long uid);
 
 	// 验证密码
-	int checkPassword(String mobile, String password);
+	int checkPassword(String telNumber, String password);
 
 	// 查询用户总量
 	int queryUserListCountByConditions(Map<String, Object> map);

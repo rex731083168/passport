@@ -8,6 +8,7 @@ public class Role {
 	private String roleName;
 	private String description;
 	private Date createTime;
+	private int belongSys;
 	private int status;
 	
 	public long getRoleId() {
@@ -33,6 +34,13 @@ public class Role {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	
+	public int getBelongSys() {
+		return belongSys;
+	}
+	public void setBelongSys(int belongSys) {
+		this.belongSys = belongSys;
 	}
 	public int getStatus() {
 		return status;

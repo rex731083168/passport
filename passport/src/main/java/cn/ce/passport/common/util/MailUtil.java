@@ -54,10 +54,10 @@ public class MailUtil {
 
 	private static void doSend(MailInfo mailInfo) {
 
-		// String mailServer = "smtp.300.cn";
-		// String user = "xxh@300.cn";
-		// String password = "xxh@";
-		// String protocol = "smtp";
+		 String mailServer = "smtp.300.cn";
+		 String user = "xxh@300.cn";
+		 String password = "xxh@";
+		 String protocol = "smtp";
 		Transport ts = null;
 		try {
 			Properties prop = new Properties();
