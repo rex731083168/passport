@@ -16,7 +16,7 @@ public interface IRerationService {
 	
 	
 	//查询用户角色
-	List<RUserRole> getByUId(long uid);
+	List<RUserRole> getByUId(String uid);
 	
 	//删除角色的权限
 	int delRoleAuth(long raId);

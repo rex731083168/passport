@@ -16,15 +16,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.ce.passport.common.ErrorCodeNo;
 import cn.ce.passport.common.util.JsonUtil;
 import cn.ce.passport.common.util.MailInfo;
 import cn.ce.passport.common.util.MailUtil;
 import cn.ce.passport.common.util.RandomUtil;
+import cn.ce.passport.common.util.UUIDUtil;
 import cn.ce.passport.dao.persistence.RUserRole;
 import cn.ce.passport.dao.persistence.Role;
 import cn.ce.passport.dao.persistence.User;
@@ -32,7 +33,6 @@ import cn.ce.passport.service.IRerationService;
 import cn.ce.passport.service.IRoleService;
 import cn.ce.passport.service.ISessionService;
 import cn.ce.passport.service.IUserService;
-import cn.ce.platform_service.common.ErrorCodeNo;
 
 import com.google.gson.Gson;
 
@@ -150,7 +150,7 @@ public class UserAppController {
 	}
 
 	/**
-	 * 注册发送邮箱code TODO 没写完且没验证
+	 * 注册发送邮箱code
 	 * 
 	 * @param
 	 * @return
@@ -169,7 +169,8 @@ public class UserAppController {
 		mailInfo.setSubject("平台注册验证码");
 		mailInfo.setContent("验证码为：" + code + ";有效期为3分钟");
 
-		// TODO code存到session里
+		logger.info("code:", code);
+
 		sessionService.setCode(code);
 
 		MailUtil.send(mailInfo, true);
@@ -185,24 +186,53 @@ public class UserAppController {
 	 */
 	@RequestMapping(value = "/register")
 	@ResponseBody
-	public String register( @RequestBody User userInfo) {
+	public String register(@RequestParam String userInfo,
+			@RequestParam(required = true, value = "sysId") int sysId,
+			@RequestParam(required = true, value = "code") int code) {
+
 		Map<String, Object> retMap = new HashMap<String, Object>();
 		retMap.put("errorCode", ErrorCodeNo.SYS000);
 		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
 
-	//	User user = new Gson().fromJson(userInfo, User.class);
+		String isExist = sessionService.getCode(code);
+		if ("".equals(isExist)) {
+			retMap.put("errorCode", ErrorCodeNo.SYS011);
+			retMap.put("msg", ErrorCodeNo.SYS011.getDesc());
+			return JsonUtil.toJson(retMap);
+		}
+		 User user = new Gson().fromJson(userInfo, User.class);
+		//User user = userInfo;
 
+		String uid = UUIDUtil.getUUID();
 		Date date = new Date();
-		userInfo.setRegTime(date);
-		// user.setPassword(MD5Util.MD5(user.getPassword()));
-		userInfo.setState(1);
-		userInfo.setCheckState(0);
+		user.setUid(uid);
+		user.setRegTime(date);
+		user.setState(1);
+		user.setCheckState(0);
+		// 开放平台 TODO
+		// if (sysId == 101) {
+		// user.setUserType(1);
+		// }
+		user.setUserType(1);
 
 		// 注册新用户
-		int ret = userService.register(userInfo);
+		int ret = userService.register(user);
 		if (ret == 0) {
 			retMap.put("errorCode", ErrorCodeNo.SYS001);
 			retMap.put("msg", ErrorCodeNo.SYS001.getDesc());
+
+		}
+		// 添加用户权限
+		// 根据sysInfo获取用户角色
+		Map<String, Object> condition = new HashMap<String, Object>();
+		condition.put("belongSys", sysId);
+		List<Role> roles = roleService.getRoles(condition);
+		// 将角色赋予用户
+		for (int i = 0; i < roles.size(); i++) {
+			RUserRole rUserRole = new RUserRole();
+			rUserRole.setRoleId(roles.get(i).getRoleId());
+			rUserRole.setUid(uid);
+			rerationService.addUserRole(rUserRole);
 		}
 
 		return JsonUtil.toJson(retMap);
@@ -255,11 +285,13 @@ public class UserAppController {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 
 		List<Object> roleList = new ArrayList<>();
+		// 密码不显示给前端
+		userInfo.setPassword("");
 		dataMap.put("userInfo", userInfo);
 
 		// 获取用户角色 本期权限先不搞，只确认角色 没有角色，可以先不让登录
 		// 后续根据获取的角色，关联权限，拿到权限直接展开页面。
-		List<RUserRole> userRole = rerationService.getByUId(userInfo.getId());
+		List<RUserRole> userRole = rerationService.getByUId(userInfo.getUid());
 		if (userRole == null) {
 			retMap.put("errorCode", ErrorCodeNo.SYS013);
 			retMap.put("msg", ErrorCodeNo.SYS013.getDesc());
@@ -276,7 +308,7 @@ public class UserAppController {
 		}
 
 		// session
-		String ticket = sessionService.setSession(userInfo.getId());
+		String ticket = sessionService.setSession(userInfo.getUid());
 
 		dataMap.put("ticket", ticket);
 		dataMap.put("role", roleList);
@@ -300,7 +332,7 @@ public class UserAppController {
 		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
 
 		User user = new Gson().fromJson(userInfo, User.class);
-
+		String uid = user.getUid();
 		// 更新
 		int ret = userService.updateUser(user);
 		if (ret == 0) {
@@ -310,7 +342,7 @@ public class UserAppController {
 		}
 
 		// 获取更新完的数据，显示用
-		user = userService.getById(user.getId());
+		user = userService.getByUid(uid);
 
 		if (ret == 0) {
 			retMap.put("errorCode", ErrorCodeNo.SYS006);
@@ -319,7 +351,7 @@ public class UserAppController {
 		}
 		// 用户表示信息封装
 		Map<String, Object> userMap = new HashMap<String, Object>();
-		userMap.put("id", user.getId());
+		userMap.put("uid", user.getUid());
 		userMap.put("userName", user.getUserName());
 
 		userMap.put("email", user.getEmail());
@@ -357,8 +389,7 @@ public class UserAppController {
 
 		try {
 			// 验证旧用户密码
-			int uid = Integer.parseInt(userId);
-			User userInfo = userService.getById(uid);
+			User userInfo = userService.getByUid(userId);
 			if (userInfo == null || !oldPassword.equals(userInfo.getPassword())) {
 				retMap.put("errorCode", ErrorCodeNo.SYS022);
 				retMap.put("msg", ErrorCodeNo.SYS022.getDesc());
@@ -366,7 +397,7 @@ public class UserAppController {
 			}
 			// 更新密码
 			User user = new User();
-			user.setId(userInfo.getId());
+			user.setUid(userId);
 			// String password = MD5Util.MD5(newPassword);
 			user.setPassword(newPassword);
 			// 这里应该验证一下更新条数，如果0，说明没更新，不过可以前端拦新旧密码对比
@@ -405,7 +436,7 @@ public class UserAppController {
 		MailInfo mailInfo = new MailInfo();
 		mailInfo.setToOne(email);
 		mailInfo.setSubject("重置密码");
-		mailInfo.setContent("点链接：" + url + path + "?code="
+		mailInfo.setContent("点链接：" + url + path + "&code="
 				+ URLEncoder.encode(sessionService.getEmailSession(email)));
 
 		MailUtil.send(mailInfo, true);
@@ -438,8 +469,8 @@ public class UserAppController {
 			List<User> userList = userService.getUsers(condition);
 
 			if (userList.size() == 0) {
-				retMap.put("errorCode", 201);
-				retMap.put("msg", "Invalid email !");
+				retMap.put("errorCode", ErrorCodeNo.SYS006);
+				retMap.put("msg", ErrorCodeNo.SYS006.getDesc());
 				return JsonUtil.toJson(retMap);
 			}
 
@@ -473,12 +504,14 @@ public class UserAppController {
 	 */
 	@RequestMapping(value = "/logout")
 	@ResponseBody
-	public String logout(@RequestParam(required = true, value = "") long userId) {
+	public String logout(
+			@RequestParam(required = true, value = "") String userId) {
 		Map<String, Object> retMap = new HashMap<String, Object>();
 		retMap.put("errorCode", ErrorCodeNo.SYS000);
 		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
 
 		// 清除session
+		// TODO 告诉前端
 		sessionService.delSession(userId);
 		return JsonUtil.toJson(retMap);
 
@@ -493,8 +526,6 @@ public class UserAppController {
 	@RequestMapping(value = "/checkTicket")
 	@ResponseBody
 	public String checkTicket(HttpServletRequest request) {
-		// public String checkTicket(HttpServletRequest request,
-		// @RequestParam(required = true, value = "ticket") String ticket) {
 		Map<String, Object> retMap = new HashMap<String, Object>();
 		retMap.put("errorCode", ErrorCodeNo.SYS000);
 		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
@@ -517,32 +548,13 @@ public class UserAppController {
 			return JsonUtil.toJson(retMap);
 		}
 
-		long uid = sessionService.getUidbyTicket(ticket);
-		User userInfo = userService.getById(uid);
+		String uid = sessionService.getUidbyTicket(ticket);
+		User userInfo = userService.getByUid(uid);
 		retMap.put("data", userInfo);
-		// retMap.put("data", uid);
 
 		return JsonUtil.toJson(retMap);
 
 	}
-
-	// /**
-	// * 根据uid获取用户基本信息 可以暂时不用
-	// *
-	// * @param uid
-	// * @return
-	// */
-	// @RequestMapping("/getUserInfobyUid")
-	// @ResponseBody
-	// public String getUserInfobyUid(long uid) {
-	//
-	// Map<String, Object> retMap = new HashMap<String, Object>();
-	//
-	// User userInfo = userService.getById(uid);
-	// retMap.put("data", userInfo);
-	//
-	// return JsonUtil.toJson(retMap);
-	// }
 
 	/**
 	 * 禁用启用用户
@@ -552,12 +564,13 @@ public class UserAppController {
 	 */
 	@RequestMapping("/modUserState")
 	@ResponseBody
-	public String modUserState(long userId, int state) {
+	public String modUserState(String userId, int state) {
 
 		Map<String, Object> retMap = new HashMap<String, Object>();
-
+		retMap.put("errorCode", ErrorCodeNo.SYS000);
+		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
 		User user = new User();
-		user.setId(userId);
+		user.setUid(userId);
 		user.setState(state);
 		int ret = userService.updateUser(user);
 		if (ret == 0) {
@@ -571,8 +584,14 @@ public class UserAppController {
 
 	@RequestMapping(value = "/getUserList")
 	@ResponseBody
-	public String getUserList(String userName, int userType, int checkState,
-			int state, String email, int currentPage, int pageSize) {
+	public String getUserList(
+			@RequestParam(value = "userName", required = false) String userName,
+			@RequestParam(value = "userType", required = false) Integer userType,
+			@RequestParam(value = "checkState", required = false) Integer checkState,
+			@RequestParam(value = "state", required = false) Integer state,
+			@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "currentPage", required = false) Integer currentPage,
+			@RequestParam(value = "pageSize", required = false) Integer pageSize) {
 
 		Map<String, Object> retMap = new HashMap<String, Object>();
 		retMap.put("errorCode", ErrorCodeNo.SYS000);
@@ -594,6 +613,35 @@ public class UserAppController {
 		dataMap.put("cnt", totalCnt);
 
 		retMap.put("data", dataMap);
+		return JsonUtil.toJson(retMap);
+
+	}
+
+	@RequestMapping(value = "/auditUser")
+	@ResponseBody
+	public String auditUser(String checkMem, int checkState, String userIds) {
+
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("errorCode", ErrorCodeNo.SYS000);
+		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
+		int count = 0;
+		String[] ids = userIds.split(",");
+		for (int i = 0; i < ids.length; i++) {
+			User user = new User();
+			user.setUid(ids[i]);
+			user.setCheckMem(checkMem);
+			user.setCheckState(checkState);
+			int ret = userService.updateUser(user);
+			if (ret > 0) {
+				count++;
+			}
+		}
+		if (count < ids.length) {
+			retMap.put("errorCode", ErrorCodeNo.SYS027);
+			retMap.put("msg", ErrorCodeNo.SYS027.getDesc());
+			return JsonUtil.toJson(retMap);
+		}
+
 		return JsonUtil.toJson(retMap);
 
 	}

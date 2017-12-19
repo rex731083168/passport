@@ -11,7 +11,7 @@ public interface IUserService {
 	int register(User user);
 
 	// 查询用户
-	User getById(long uid);
+	User getByUid(String uid);
 
 	// 批量查询
 	List<User> getUsers(Map condition);
@@ -23,7 +23,7 @@ public interface IUserService {
 	User getUserInfo(String username, String password);
 
 	// 用户登出
-	int logout(long uid);
+	int logout(String uid);
 
 	// 验证密码
 	int checkPassword(String telNumber, String password);

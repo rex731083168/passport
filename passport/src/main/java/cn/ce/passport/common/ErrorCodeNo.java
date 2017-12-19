@@ -1,4 +1,5 @@
-package cn.ce.platform_service.common;
+package cn.ce.passport.common;
+
 
 /**
  *
@@ -34,6 +35,7 @@ public enum ErrorCodeNo {
 	,SYS024("产品码不正确")
 	,SYS025("旧版产品码，不支持注册菜单。请申请新的产品码")
 	,SYS026("当前版本已经存在")
+	,SYS027("未全部完成更新")
 	;
 	
 	

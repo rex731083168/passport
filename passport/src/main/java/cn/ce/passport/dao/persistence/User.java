@@ -4,7 +4,8 @@ import java.util.Date;
 
 public class User {
 
-	private long id;
+	//private long id;
+	private String uid;
 	private String userName;
 	private String password;
 	private String email;
@@ -31,12 +32,21 @@ public class User {
 	private String userRealName;
 
 	/******************** 认证时需要的信息 ************************/
-	public long getId() {
-		return id;
+
+//	public long getId() {
+//		return id;
+//	}
+//
+//	public void setId(long id) {
+//		this.id = id;
+//	}
+
+	public String getUid() {
+		return uid;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setUid(String uid) {
+		this.uid = uid;
 	}
 
 	public String getUserName() {

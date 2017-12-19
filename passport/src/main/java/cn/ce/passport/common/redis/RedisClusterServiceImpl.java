@@ -70,8 +70,17 @@ public class RedisClusterServiceImpl implements RedisClusterService {
 
 	@Override
 	public String set(String key, String value) {
-		// TODO Auto-generated method stub
-		return null;
+		boolean broken = false;
+		try {
+			return jedis.set(key, value);
+		} catch (JedisConnectionException e) {
+
+			broken = true;
+			throw e;
+		} finally {
+			if (jedis != null && !broken) {
+			}
+		}
 	}
 
 	@Override

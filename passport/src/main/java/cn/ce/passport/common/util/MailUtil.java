@@ -106,6 +106,7 @@ public class MailUtil {
 		// 创建邮件对象
 		MimeMessage message = new MimeMessage(session);
 		// 指明邮件的发件人
+		nick = "Passport";
 		message.setFrom(new InternetAddress(nick + "<" + user + ">"));
 		// 指明邮件的收件人，现在发件人和收件人是一样的，那就是自己给自己发
 		message.setRecipient(Message.RecipientType.TO, new InternetAddress(

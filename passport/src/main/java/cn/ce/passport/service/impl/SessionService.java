@@ -15,9 +15,9 @@ public class SessionService implements ISessionService {
 	RedisClusterService redis;
 
 	@Override
-	public String setSession(long uid) {
+	public String setSession(String uid) {
 		// uid 加密 ；存到redis
-		String sessionId = AESUtil.getInstance().encrypt(String.valueOf(uid));
+		String sessionId = AESUtil.getInstance().encrypt(uid);
 		redis.set(sessionId, "exist", 7 * 24 * 60 * 60);
 		return sessionId;
 
@@ -34,17 +34,15 @@ public class SessionService implements ISessionService {
 	}
 
 	@Override
-	public long getUidbyTicket(String ticket) {
+	public String getUidbyTicket(String ticket) {
 		// 解密出uid
-		String uidStr = AESUtil.getInstance().decrypt(ticket);
-		long uid = Long.valueOf(uidStr);
-		return uid;
+		return AESUtil.getInstance().decrypt(ticket);
 
 	}
 
 	@Override
-	public String delSession(long uid) {
-		String sessionId = AESUtil.getInstance().encrypt(String.valueOf(uid));
+	public String delSession(String uid) {
+		String sessionId = AESUtil.getInstance().encrypt(uid);
 		redis.del(sessionId);
 		return sessionId;
 	}
@@ -70,9 +68,8 @@ public class SessionService implements ISessionService {
 	}
 
 	@Override
-	public String getCode(String code) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getCode(long code) {
+		return redis.get(String.valueOf(code));
 	}
 
 }

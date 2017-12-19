@@ -12,7 +12,7 @@ public interface RerationMapper {
 	
 	int addUserRole(RUserRole rUserRole);
 	
-	List<RUserRole> getByUId(long uid);
+	List<RUserRole> getByUId(String uid);
 	
 	int delRoleAuth(long raId);
 	
