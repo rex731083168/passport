@@ -6,7 +6,7 @@ public interface ISessionService {
 	String setSession(String uid);
 
 	// 清除session
-	String delSession(String uid);
+	int delSession(String ticket);
 
 	// 验证session
 	boolean checkSession(String ticket);

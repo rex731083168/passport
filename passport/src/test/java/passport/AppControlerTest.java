@@ -57,20 +57,20 @@ public class AppControlerTest {
 	// System.out.println(json);
 	// }
 
-	 @Test
-	 public void sendEmail() throws Exception {
-	 MvcResult result = mockMvc
-	 .perform(post("/sendEmail").param("email", "fuqingyan@300.cn"))
-	 .andExpect(status().isOk()).andReturn();
-	 String json = result.getResponse().getContentAsString();
-	 System.out.println(json);
-	 }
+//	 @Test
+//	 public void sendEmail() throws Exception {
+//	 MvcResult result = mockMvc
+//	 .perform(post("/sendEmail").param("email", "fuqingyan@300.cn"))
+//	 .andExpect(status().isOk()).andReturn();
+//	 String json = result.getResponse().getContentAsString();
+//	 System.out.println(json);
+//	 }
 
 //	 @Test
 //	 public void testLog() throws Exception {
 //	 MvcResult result = mockMvc
 //	 .perform(
-//	 post("/login").param("userName", "liuer").param(
+//	 post("/login").param("userName", "fuqy").param(
 //	 "password", "e10adc3949ba59abbe56e057f20f883e").param("sysId", "103"))
 //	 .andExpect(status().isOk()).andReturn();
 //	 String json = result.getResponse().getContentAsString();
@@ -83,7 +83,7 @@ public class AppControlerTest {
 //		User user = new User();
 //		MvcResult result = mockMvc
 //				.perform(post("/register")
-//								.param("code", "189209").param("sysId", "103"))
+//								.param("code", "189209").param("sysId", "103").param("userInfo", "a"))
 //				.andExpect(status().isOk()).andReturn();
 //		String json = result.getResponse().getContentAsString();
 //		System.out.println(json);
@@ -99,15 +99,15 @@ public class AppControlerTest {
 	// System.out.println(json);
 	// }
 
-	// @Test
-	// public void testticket() throws Exception {
-	// MvcResult result = mockMvc.perform(post("/checkTicket")
-	// .param("ticket", "gPPi0ZOZKscfU58RCqbszg=="))
-	// .andExpect(status().isOk())
-	// .andReturn();
-	// String json = result.getResponse().getContentAsString();
-	// System.out.println(json);
-	// }
+	 @Test
+	 public void testticket() throws Exception {
+	 MvcResult result = mockMvc.perform(post("/checkTicket")
+	 .param("ticket", "tSCfBC8rnj1chU+NZ3ATdb5iYPC8I4kcIS1eyPTwqbk="))
+	 .andExpect(status().isOk())
+	 .andReturn();
+	 String json = result.getResponse().getContentAsString();
+	 System.out.println(json);
+	 }
 
 	// @Test
 	// public void testticket() throws Exception {
@@ -128,16 +128,16 @@ public class AppControlerTest {
 //	 System.out.println(json);
 //	 }
 
-	// @Test
-	// public void sendmail() throws Exception {
-	// MvcResult result = mockMvc
-	// .perform(
-	// post("/sendMailforPassword").param("email",
-	// "fuqingyan@300.cn")).andExpect(status().isOk())
-	// .andReturn();
-	// String json = result.getResponse().getContentAsString();
-	// System.out.println(json);
-	// }
+//	 @Test
+//	 public void sendmail() throws Exception {
+//	 MvcResult result = mockMvc
+//	 .perform(
+//	 post("/sendMailforPassword").param("email",
+//	 "fuqingyan@300.cn")).andExpect(status().isOk())
+//	 .andReturn();
+//	 String json = result.getResponse().getContentAsString();
+//	 System.out.println(json);
+//	 }
 
 	// @Test
 	// public void resetpw() throws Exception {

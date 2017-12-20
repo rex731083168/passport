@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import cn.ce.passport.common.redis.RedisClusterService;
 import cn.ce.passport.common.util.AESUtil;
+import cn.ce.passport.common.util.RandomUtil;
 import cn.ce.passport.service.ISessionService;
 
 @Service("sessionService")
@@ -16,8 +17,11 @@ public class SessionService implements ISessionService {
 
 	@Override
 	public String setSession(String uid) {
-		// uid 加密 ；存到redis
-		String sessionId = AESUtil.getInstance().encrypt(uid);
+		// uid 加密 ；存到redis 每次加密生成不同的值，业务上多用户登录同一账号防止互相影响登录状态
+
+		long ran = RandomUtil.random6Number();
+		String sessionId = AESUtil.getInstance().encrypt(
+				String.valueOf(ran) + uid);
 		redis.set(sessionId, "exist", 7 * 24 * 60 * 60);
 		return sessionId;
 
@@ -36,15 +40,19 @@ public class SessionService implements ISessionService {
 	@Override
 	public String getUidbyTicket(String ticket) {
 		// 解密出uid
-		return AESUtil.getInstance().decrypt(ticket);
+		String sessionId = AESUtil.getInstance().decrypt(ticket);
+		if (sessionId == null || "".equals(sessionId)) {
+			return null;
+		}
+		return sessionId.substring(6);
 
 	}
 
 	@Override
-	public String delSession(String uid) {
-		String sessionId = AESUtil.getInstance().encrypt(uid);
-		redis.del(sessionId);
-		return sessionId;
+	public int delSession(String ticket) {
+		// String sessionId = AESUtil.getInstance().encrypt(uid);
+		return redis.del(ticket);
+//		return ticket;
 	}
 
 	@Override

@@ -55,6 +55,17 @@ public class UserAppController {
 	@Value("${send.url}")
 	private String url;
 
+	@Value("${mail.server}")
+	private String mailServer;
+	@Value("${mail.user}")
+	private String user;
+	@Value("${mail.password}")
+	private String password;
+	@Value("${mail.protocol}")
+	private String protocol;
+	@Value("${mail.nick}")
+	private String nick;
+
 	public static Logger logger = LoggerFactory
 			.getLogger(UserAppController.class);
 
@@ -77,7 +88,6 @@ public class UserAppController {
 
 		// 图省事,用以后查询用户列表的方法
 		condition.put("userName", userName);
-		// condition.put("isvalid", isvalid);
 
 		List<User> userList = userService.getUsers(condition);
 		if (userList.size() > 0) {
@@ -165,6 +175,13 @@ public class UserAppController {
 
 		long code = RandomUtil.random6Number();
 		MailInfo mailInfo = new MailInfo();
+		// 邮件配置信息
+		mailInfo.setMailServer(mailServer);
+		mailInfo.setUser(user);
+		mailInfo.setPassword(password);
+		mailInfo.setProtocol(protocol);
+		mailInfo.setNick(nick);
+
 		mailInfo.setToOne(email);
 		mailInfo.setSubject("平台注册验证码");
 		mailInfo.setContent("验证码为：" + code + ";有效期为3分钟");
@@ -195,13 +212,13 @@ public class UserAppController {
 		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
 
 		String isExist = sessionService.getCode(code);
-		if ("".equals(isExist)) {
-			retMap.put("errorCode", ErrorCodeNo.SYS011);
-			retMap.put("msg", ErrorCodeNo.SYS011.getDesc());
+		if ("".equals(isExist) || isExist == null) {
+			retMap.put("errorCode", ErrorCodeNo.SYS028);
+			retMap.put("msg", ErrorCodeNo.SYS028.getDesc());
 			return JsonUtil.toJson(retMap);
 		}
-		 User user = new Gson().fromJson(userInfo, User.class);
-		//User user = userInfo;
+		User user = new Gson().fromJson(userInfo, User.class);
+		// User user = userInfo;
 
 		String uid = UUIDUtil.getUUID();
 		Date date = new Date();
@@ -209,10 +226,7 @@ public class UserAppController {
 		user.setRegTime(date);
 		user.setState(1);
 		user.setCheckState(0);
-		// 开放平台 TODO
-		// if (sysId == 101) {
-		// user.setUserType(1);
-		// }
+		// 开放平台 TODO fe会给
 		user.setUserType(1);
 
 		// 注册新用户
@@ -264,7 +278,6 @@ public class UserAppController {
 		}
 
 		int sid = Integer.valueOf(sysId);
-		// String pw = MD5Util.MD5(password);
 
 		User userInfo = userService.getUserInfo(userName, password);
 		if (userInfo == null) {
@@ -432,8 +445,14 @@ public class UserAppController {
 		retMap.put("errorCode", ErrorCodeNo.SYS000);
 		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
 
-		// int uid = Integer.valueOf(userId);
 		MailInfo mailInfo = new MailInfo();
+		// 邮件配置信息
+		mailInfo.setMailServer(mailServer);
+		mailInfo.setUser(user);
+		mailInfo.setPassword(password);
+		mailInfo.setProtocol(protocol);
+		mailInfo.setNick(nick);
+
 		mailInfo.setToOne(email);
 		mailInfo.setSubject("重置密码");
 		mailInfo.setContent("点链接：" + url + path + "&code="
@@ -476,7 +495,6 @@ public class UserAppController {
 
 			// 更新密码
 			User user = userList.get(0);
-			// String newpassword = MD5Util.MD5(password);
 			user.setPassword(password);
 			// 这里应该验证一下更新条数，如果0，说明没更新
 			int ret = userService.updateUser(user);
@@ -504,15 +522,16 @@ public class UserAppController {
 	 */
 	@RequestMapping(value = "/logout")
 	@ResponseBody
-	public String logout(
+	public String logout(HttpServletRequest request,
 			@RequestParam(required = true, value = "") String userId) {
+
 		Map<String, Object> retMap = new HashMap<String, Object>();
 		retMap.put("errorCode", ErrorCodeNo.SYS000);
 		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
 
 		// 清除session
-		// TODO 告诉前端
-		sessionService.delSession(userId);
+		String ticket = request.getHeader("ticket");
+		sessionService.delSession(ticket);
 		return JsonUtil.toJson(retMap);
 
 	}

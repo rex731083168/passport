@@ -9,26 +9,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MailUtil {
-
-	@Value("${mail.server}")
-	private static String mailServer;
-	@Value("${mail.user}")
-	private static String user;
-	@Value("${mail.password}")
-	private static String password;
-	@Value("${mail.protocol}")
-	private static String protocol;
-	@Value("${mail.nick}")
-	private static String nick;
-
-	private static Logger logger = LoggerFactory.getLogger(MailUtil.class);
 
 	/**
 	 * 发送邮件
@@ -54,15 +38,15 @@ public class MailUtil {
 
 	private static void doSend(MailInfo mailInfo) {
 
-		 String mailServer = "smtp.300.cn";
-		 String user = "xxh@300.cn";
-		 String password = "xxh@";
-		 String protocol = "smtp";
+		// String mailServer = "smtp.300.cn";
+		// String user = "xxh@300.cn";
+		// String password = "xxh@";
+		// String protocol = "smtp";
 		Transport ts = null;
 		try {
 			Properties prop = new Properties();
-			prop.setProperty("mail.host", mailServer);
-			prop.setProperty("mail.transport.protocol", protocol);
+			prop.setProperty("mail.host", mailInfo.getMailServer());
+			prop.setProperty("mail.transport.protocol", mailInfo.getProtocol());
 			prop.setProperty("mail.smtp.auth", "true");
 			// 使用JavaMail发送邮件的5个步骤
 			// 1、创建session
@@ -72,9 +56,11 @@ public class MailUtil {
 			// 2、通过session得到transport对象
 			ts = session.getTransport();
 			// 3、使用邮箱的用户名和密码连上邮件服务器，发送邮件时，发件人需要提交邮箱的用户名和密码给smtp服务器，用户名和密码都通过验证之后才能够正常发送邮件给收件人。
-			ts.connect(mailServer, user, password);
+			ts.connect(mailInfo.getMailServer(), mailInfo.getUser(),
+					mailInfo.getPassword());
 			// 4、创建邮件
-			Message message = createSimpleMail(session, mailInfo, user);
+			Message message = createSimpleMail(session, mailInfo,
+					mailInfo.getUser());
 			// 5、发送邮件
 			ts.sendMessage(message, message.getAllRecipients());
 		} catch (Exception e) {
@@ -84,7 +70,7 @@ public class MailUtil {
 				try {
 					ts.close();
 				} catch (MessagingException e) {
-					
+
 				}
 			}
 		}
@@ -106,8 +92,9 @@ public class MailUtil {
 		// 创建邮件对象
 		MimeMessage message = new MimeMessage(session);
 		// 指明邮件的发件人
-		nick = "Passport";
-		message.setFrom(new InternetAddress(nick + "<" + user + ">"));
+
+		message.setFrom(new InternetAddress(mailInfo.getNick() + "<" + user
+				+ ">"));
 		// 指明邮件的收件人，现在发件人和收件人是一样的，那就是自己给自己发
 		message.setRecipient(Message.RecipientType.TO, new InternetAddress(
 				mailInfo.getToOne()));
