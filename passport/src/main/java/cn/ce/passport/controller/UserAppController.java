@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,12 +58,16 @@ public class UserAppController {
 
 	@Value("${mail.server}")
 	private String mailServer;
+
 	@Value("${mail.user}")
 	private String user;
+
 	@Value("${mail.password}")
 	private String password;
+
 	@Value("${mail.protocol}")
 	private String protocol;
+
 	@Value("${mail.nick}")
 	private String nick;
 
@@ -88,6 +93,7 @@ public class UserAppController {
 
 		// 图省事,用以后查询用户列表的方法
 		condition.put("userName", userName);
+		// condition.put("isvalid", isvalid);
 
 		List<User> userList = userService.getUsers(condition);
 		if (userList.size() > 0) {
@@ -147,7 +153,6 @@ public class UserAppController {
 
 		// 图省事,用以后查询用户列表的方法
 		condition.put("email", email);
-		// condition.put("isvalid", isvalid);
 
 		List<User> userList = userService.getUsers(condition);
 		if (userList.size() > 0) {
@@ -175,7 +180,7 @@ public class UserAppController {
 
 		long code = RandomUtil.random6Number();
 		MailInfo mailInfo = new MailInfo();
-		// 邮件配置信息
+		// 设置邮件信息
 		mailInfo.setMailServer(mailServer);
 		mailInfo.setUser(user);
 		mailInfo.setPassword(password);
@@ -226,7 +231,7 @@ public class UserAppController {
 		user.setRegTime(date);
 		user.setState(1);
 		user.setCheckState(0);
-		// 开放平台 TODO fe会给
+		// 开放平台 TODO 前端应该传
 		user.setUserType(1);
 
 		// 注册新用户
@@ -345,6 +350,8 @@ public class UserAppController {
 		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
 
 		User user = new Gson().fromJson(userInfo, User.class);
+		// 用户状态为可用，fe不传这个值，默认映射对象会设为零
+		user.setState(1);
 		String uid = user.getUid();
 		// 更新
 		int ret = userService.updateUser(user);
@@ -411,7 +418,6 @@ public class UserAppController {
 			// 更新密码
 			User user = new User();
 			user.setUid(userId);
-			// String password = MD5Util.MD5(newPassword);
 			user.setPassword(newPassword);
 			// 这里应该验证一下更新条数，如果0，说明没更新，不过可以前端拦新旧密码对比
 			int ret = userService.updateUser(user);
@@ -446,13 +452,12 @@ public class UserAppController {
 		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
 
 		MailInfo mailInfo = new MailInfo();
-		// 邮件配置信息
+		// 设置邮件信息
 		mailInfo.setMailServer(mailServer);
 		mailInfo.setUser(user);
 		mailInfo.setPassword(password);
 		mailInfo.setProtocol(protocol);
 		mailInfo.setNick(nick);
-
 		mailInfo.setToOne(email);
 		mailInfo.setSubject("重置密码");
 		mailInfo.setContent("点链接：" + url + path + "&code="
@@ -495,6 +500,7 @@ public class UserAppController {
 
 			// 更新密码
 			User user = userList.get(0);
+			// String newpassword = MD5Util.MD5(password);
 			user.setPassword(password);
 			// 这里应该验证一下更新条数，如果0，说明没更新
 			int ret = userService.updateUser(user);
@@ -524,7 +530,6 @@ public class UserAppController {
 	@ResponseBody
 	public String logout(HttpServletRequest request,
 			@RequestParam(required = true, value = "") String userId) {
-
 		Map<String, Object> retMap = new HashMap<String, Object>();
 		retMap.put("errorCode", ErrorCodeNo.SYS000);
 		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
@@ -550,7 +555,8 @@ public class UserAppController {
 		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
 
 		String ticket = request.getHeader("ticket");
-		if (ticket == null && "".equals(ticket)) {
+
+		if (StringUtils.isEmpty(ticket)) {
 			retMap.put("errorCode", ErrorCodeNo.SYS005);
 			retMap.put("msg", ErrorCodeNo.SYS005.getDesc());
 
@@ -650,6 +656,8 @@ public class UserAppController {
 			user.setUid(ids[i]);
 			user.setCheckMem(checkMem);
 			user.setCheckState(checkState);
+			// 用户状态为可用，默认映射对象会设为零
+			user.setState(1);
 			int ret = userService.updateUser(user);
 			if (ret > 0) {
 				count++;

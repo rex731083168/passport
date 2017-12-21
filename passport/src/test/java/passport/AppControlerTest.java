@@ -99,24 +99,27 @@ public class AppControlerTest {
 	// System.out.println(json);
 	// }
 
+	
+	//yRMtzWbxdpZFiSf7P5v0P78e3Ykz4LGZSatYsT2VXOI=
+	//BCQ/fjvYUV6hcc0ysKbFkbeJeRXSOuswsvEd6w6y2gk=
 	 @Test
 	 public void testticket() throws Exception {
 	 MvcResult result = mockMvc.perform(post("/checkTicket")
-	 .param("ticket", "tSCfBC8rnj1chU+NZ3ATdb5iYPC8I4kcIS1eyPTwqbk="))
+	 .param("ticket", "yRMtzWbxdpZFiSf7P5v0P78e3Ykz4LGZSatYsT2VXOI="))
 	 .andExpect(status().isOk())
 	 .andReturn();
 	 String json = result.getResponse().getContentAsString();
 	 System.out.println(json);
 	 }
 
-	// @Test
-	// public void testticket() throws Exception {
-	// MvcResult result = mockMvc
-	// .perform(post("/logout").param("userId", "100098"))
-	// .andExpect(status().isOk()).andReturn();
-	// String json = result.getResponse().getContentAsString();
-	// System.out.println(json);
-	// }
+//	 @Test
+//	 public void testticket() throws Exception {
+//	 MvcResult result = mockMvc
+//	 .perform(post("/logout").param("userId", "100098"))
+//	 .andExpect(status().isOk()).andReturn();
+//	 String json = result.getResponse().getContentAsString();
+//	 System.out.println(json);
+//	 }
 
 //	 @Test
 //	 public void testupdate() throws Exception {
