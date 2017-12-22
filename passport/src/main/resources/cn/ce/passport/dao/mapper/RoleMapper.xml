@@ -8,24 +8,29 @@
 		<id column="description" property="description" />
 		<id column="create_time" property="createTime" />
 	</resultMap>
-	
 
-	<select id="getRoles" parameterType="java.util.HashMap" resultMap="roleMap" >
-		SELECT * FROM role WHERE  1=1 
-        <if test="roleName!=null and roleName!=''">  
-        AND role_name = #{roleName}  
-        </if>   
-        <if test="beganDate!=null and beganDate!=''">  
-        AND create_time &gt;= #{beganDate}  
-        </if>   
-         <if test="endDate!=null and endDate!=''">  
-        AND create_time &lt;= #{endDate}  
-        </if>   
+
+	<select id="getRoles" parameterType="java.util.HashMap"
+		resultMap="roleMap">
+		SELECT * FROM role WHERE 1=1
+		<if test="roleName!=null and roleName!=''">
+			AND role_name = #{roleName}
+		</if>
+		<if test="beganDate!=null and beganDate!=''">
+			AND create_time &gt;= #{beganDate}
+		</if>
+		<if test="endDate!=null and endDate!=''">
+			AND create_time &lt;= #{endDate}
+		</if>
+		<if test="belongSys!=null and belongSys!=''">
+			AND belongSys = #{belongSys}
+		</if>
 	</select>
-	
+
 	<insert id="addRole" useGeneratedKeys="true" keyProperty="roleId"
 		parameterType="cn.ce.passport.dao.persistence.Role">
-		INSERT INTO role(role_name,description,create_time,status) 
+		INSERT INTO
+		role(role_name,description,create_time,status)
 		VALUES(
 		#{roleName},
 		#{description},
@@ -33,21 +38,22 @@
 		#{status}
 		)
 	</insert>
-	
+
 	<select id="getById" resultMap="roleMap" parameterType="long">
-		SELECT * FROM role WHERE 
+		SELECT *
+		FROM role WHERE
 		role_id = #{roleId}
 	</select>
-	
-	<update id="updateRole" 
-		parameterType="cn.ce.passport.dao.persistence.Role">
-		UPDATE role SET role_name = #{roleName}  ,
-						description = #{description}
+
+	<update id="updateRole" parameterType="cn.ce.passport.dao.persistence.Role">
+		UPDATE role SET role_name
+		= #{roleName} ,
+		description = #{description}
 		WHERE
-		    role_id=#{roleId}
-		    
+		role_id=#{roleId}
+
 	</update>
-	
-	
-	
+
+
+
 </mapper>

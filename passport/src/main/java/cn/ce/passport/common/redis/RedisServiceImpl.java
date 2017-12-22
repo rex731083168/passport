@@ -1,16 +1,15 @@
 package cn.ce.passport.common.redis;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.JedisPool;
@@ -18,7 +17,6 @@ import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Pipeline;
 import redis.clients.jedis.Transaction;
 import redis.clients.jedis.exceptions.JedisConnectionException;
-import redis.clients.jedis.HostAndPort;
 
 public class RedisServiceImpl implements RedisService {
 	private Logger logger = LoggerFactory.getLogger(RedisServiceImpl.class);
@@ -33,6 +31,8 @@ public class RedisServiceImpl implements RedisService {
 	private int maxActive = 10;
 	private int maxIdle = 5;
 	private String password;
+	
+	JedisCluster jedis;
 
 	public void setRedisAddr(String redisAddr) {
 		this.redisAddr = redisAddr;
@@ -75,34 +75,28 @@ public class RedisServiceImpl implements RedisService {
 		}
 	}
 
-	public void initCluster() {
-		if (redisAddr == null || "".equals(redisAddr.trim())
-				|| "NULL".equals(redisAddr.trim())) {
-			logger.warn("no redis addr was configured,this redis service will be unavaliable");
-			return;
-		}
-		JedisPoolConfig cfg = new JedisPoolConfig();
-		cfg.setMaxTotal(maxActive);
-		cfg.setMaxIdle(maxIdle);
-
-		addrInfo = redisAddr.split(":");
-		// 2017.12.29 fuqy password
-		jedisPool = new JedisPool(cfg, addrInfo[0],
-				Integer.valueOf(addrInfo[1]), 30000, password, 0);
-		// load cas scripts
-
-		Set<HostAndPort> nodes = new LinkedHashSet<HostAndPort>();
-		nodes.add(new HostAndPort(addrInfo[0], Integer.valueOf(addrInfo[1])));
-
-		JedisCluster jedis = new JedisCluster(nodes,2000,2000,5, password,cfg);
-		
-		// try {
-		// CAS_KEY = jedis.scriptLoad(CAS_CMD);
-		// SUBS_KEY = jedis.scriptLoad(SUBS_CMD);
-		// } finally {
-		// jedisPool.returnResource(jedis);
-		// }
-	}
+//集群操作在另一个
+//	public void initCluster() {
+//		
+//		JedisPoolConfig cfg = new JedisPoolConfig();
+//		cfg.setMaxTotal(maxActive);
+//		cfg.setMaxIdle(maxIdle);
+//
+//		addrInfo = redisAddr.split(":");
+//		// 2017.12.29 fuqy password
+//		jedisPool = new JedisPool(cfg, addrInfo[0],
+//				Integer.valueOf(addrInfo[1]), 30000, password, 0);
+//		// load cas scripts
+//
+//		Set<HostAndPort> nodes = new LinkedHashSet<HostAndPort>();
+//		nodes.add(new HostAndPort("10.12.40.161", 6001));
+//		nodes.add(new HostAndPort("10.12.40.161", 5001));
+//		nodes.add(new HostAndPort("10.12.40.161", 7001));
+//
+//	    jedis = new JedisCluster(nodes, 2000, 2000, 5, password,
+//				cfg);
+//
+//	}
 
 	public void stop() {
 		if (jedisPool != null) {
@@ -166,17 +160,31 @@ public class RedisServiceImpl implements RedisService {
 
 	@Override
 	public String set(String key, String value, int expireSeconds) {
-		Jedis jedis = jedisPool.getResource();
+//		Jedis jedis = jedisPool.getResource();
+//		boolean broken = false;
+//		try {
+//			return jedis.setex(key, expireSeconds, value);
+//		} catch (JedisConnectionException e) {
+//			jedisPool.returnBrokenResource(jedis);
+//			broken = true;
+//			throw e;
+//		} finally {
+//			if (jedis != null && !broken) {
+//				jedisPool.returnResource(jedis);
+//			}
+//		}
+		
+		
 		boolean broken = false;
 		try {
 			return jedis.setex(key, expireSeconds, value);
 		} catch (JedisConnectionException e) {
-			jedisPool.returnBrokenResource(jedis);
+//			jedisPool.returnBrokenResource(jedis);
 			broken = true;
 			throw e;
 		} finally {
 			if (jedis != null && !broken) {
-				jedisPool.returnResource(jedis);
+//				jedisPool.returnResource(jedis);
 			}
 		}
 	}

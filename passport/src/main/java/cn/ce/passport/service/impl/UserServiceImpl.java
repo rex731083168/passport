@@ -18,7 +18,7 @@ public class UserServiceImpl implements IUserService {
 	UserMapper userMapper;
 
 	@Override
-	public User getById(long uid) {
+	public User getByUid(String uid) {
 		return userMapper.findById(uid);
 	}
 
@@ -41,23 +41,23 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public User getUserInfo(String username, String password) {
+	public User getUserInfo(String userName, String password) {
 		User user = new User();
-		user.setUsername(username);
+		user.setUserName(userName);
 		user.setPassword(password);
 		return userMapper.getUserInfo(user);
 	}
 
 	@Override
-	public int logout(long uid) {
+	public int logout(String uid) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int checkPassword(String mobile, String password) {
+	public int checkPassword(String telNumber, String password) {
 		User user = new User();
-		user.setMobile(mobile);
+		user.setTelNumber(telNumber);
 		user.setPassword(password);
 		User res = new User();
 		res = userMapper.getUserInfo(user);

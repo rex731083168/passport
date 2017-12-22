@@ -7,7 +7,7 @@ import cn.ce.passport.dao.persistence.User;
 
 public interface UserMapper {
 
-	public User findById(long uid);
+	public User findById(String uid);
 
 	public int register(User user);
 
@@ -17,7 +17,7 @@ public interface UserMapper {
 
 	public User getUserInfo(User user);
 
-	public int logout(long uid);
+	public int logout(String uid);
 
 	int queryUserListCountByConditions(Map<String, Object> map);
 

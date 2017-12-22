@@ -3,28 +3,29 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ce.passport.dao.mapper.UserMapper">
 	<resultMap type="cn.ce.passport.dao.persistence.User" id="userMap">
-		<id column="id" property="id" />
-		<result column="name" property="name" />
-		<result column="create_time" property="creattime" />
+
 	</resultMap>
 
 
 
-	<select id="findById" parameterType="long" resultMap="userMap">
+	<select id="findById" parameterType="String" resultMap="userMap">
 		SELECT *
-		FROM user WHERE id=#{id}
+		FROM user WHERE uid=#{uid}
 	</select>
 
 	<insert id="register" useGeneratedKeys="true" keyProperty="id"
 		parameterType="cn.ce.passport.dao.persistence.User">
 		INSERT INTO
-		user(username,password,email,create_time,status)
+		user(uid,userName,password,email,state,checkState,userType,regTime)
 		VALUES(
-		#{username},
+		#{uid},
+		#{userName},
 		#{password},
 		#{email},
-		#{creattime},
-		#{status}
+		#{state},
+		#{checkState},
+		#{userType},
+		#{regTime}
 		)
 	</insert>
 
@@ -32,23 +33,27 @@
 	<select id="getUsers" parameterType="java.util.HashMap"
 		resultMap="userMap">
 		SELECT * FROM user WHERE 1=1
-		<if test="username!=null and username!=''">
-			AND username = #{username}
+		<if test="userName!=null and userName!=''">
+			AND userName = #{userName}
 		</if>
 		<if test="email!=null and email!=''">
 			AND email = #{email}
 		</if>
-		<if test="isvalid!=null and isvalid!=''">
-			AND isvalid = #{isvalid}
+		<if test="idCard!=null and idCard!=''">
+			AND idCard = #{idCard}
+		</if>
+		<if test="state!=null and state!=''">
+			AND state = #{state}
 		</if>
 	</select>
 
 	<select id="getUserInfo" resultMap="userMap"
 		parameterType="cn.ce.passport.dao.persistence.User">
 		SELECT * FROM user WHERE
-		username= #{username} OR email=
-		#{username} AND password =
-		#{password}
+		(userName= #{userName} AND
+		password =#{password})
+		OR
+		(email=#{userName} AND password =#{password})
 	</select>
 
 	<update id="updateUser" parameterType="cn.ce.passport.dao.persistence.User">
@@ -59,24 +64,52 @@
 		<if test="email!=null and email!=''">
 			email = #{email},
 		</if>
-		<if test="username!=null and username!=''">
-			username = #{username},
+		<if test="userName!=null and userName!=''">
+			userName = #{userName},
 		</if>
-		id = #{id}
+		<if test="enterpriseName!=null and enterpriseName!=''">
+			enterpriseName = #{enterpriseName},
+		</if>
+		<if test="idCard!=null and idCard!=''">
+			idCard = #{idCard},
+		</if>
+		<if test="userRealName!=null and userRealName!=''">
+			userRealName = #{userRealName},
+		</if>
+		<if test="checkState!=null and checkState!=''">
+			checkState = #{checkState},
+		</if>
+		<if test="state!=null and state!='' or 0 == state">
+			state = #{state},
+		</if>
+		<if test="checkMem!=null and checkMem!=''">
+			checkMem = #{checkMem},
+		</if>
+
+		uid = #{uid}
 
 		WHERE
-		id = #{id}
+		uid = #{uid}
 	</update>
 
 
 	<select id="queryUserListCountByConditions" parameterType="java.util.HashMap"
 		resultType="java.lang.Integer">
 		SELECT count(*) FROM user WHERE 1=1
-		<if test="username!=null and username!=''">
-			AND username = #{username}
+		<if test="userName!=null and userName!=''">
+			AND userName = #{userName}
 		</if>
-		<if test="isvalid!=null and isvalid!=''">
-			AND isvalid = #{isvalid}
+		<if test="userType!=null and userType!=''">
+			AND userType = #{userType}
+		</if>
+		<if test="checkState!=null and checkState!=''">
+			AND checkState = #{checkState}
+		</if>
+		<if test="email!=null and email!=''">
+			AND email = #{email}
+		</if>
+		<if test="state!=null and state!=''">
+			AND state = #{state}
 		</if>
 	</select>
 
@@ -84,11 +117,20 @@
 	<select id="queryUserListByConditions" parameterType="java.util.HashMap"
 		resultMap="userMap">
 		SELECT * FROM user WHERE 1=1
-		<if test="username!=null and username!=''">
-			AND username = #{username}
+		<if test="userName!=null and userName!=''">
+			AND userName = #{userName}
 		</if>
-		<if test="isvalid!=null and isvalid!=''">
-			AND isvalid = #{isvalid}
+		<if test="userType!=null and userType!=''">
+			AND userType = #{userType}
+		</if>
+		<if test="checkState!=null and checkState!=''">
+			AND checkState = #{checkState}
+		</if>
+		<if test="email!=null and email!=''">
+			AND email = #{email}
+		</if>
+		<if test="state!=null and state!=''">
+			AND state = #{state}
 		</if>
 
 		ORDER BY id ASC

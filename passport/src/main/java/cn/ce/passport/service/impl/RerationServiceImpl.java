@@ -30,7 +30,7 @@ public class RerationServiceImpl implements IRerationService {
 	}
 
 	@Override
-	public List<RUserRole> getByUId(long uid) {
+	public List<RUserRole> getByUId(String uid) {
 
 		return rerationMapper.getByUId(uid);
 	}
