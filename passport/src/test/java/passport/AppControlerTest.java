@@ -102,15 +102,15 @@ public class AppControlerTest {
 	
 	//yRMtzWbxdpZFiSf7P5v0P78e3Ykz4LGZSatYsT2VXOI=
 	//BCQ/fjvYUV6hcc0ysKbFkbeJeRXSOuswsvEd6w6y2gk=
-	 @Test
-	 public void testticket() throws Exception {
-	 MvcResult result = mockMvc.perform(post("/checkTicket")
-	 .param("ticket", "yRMtzWbxdpZFiSf7P5v0P78e3Ykz4LGZSatYsT2VXOI="))
-	 .andExpect(status().isOk())
-	 .andReturn();
-	 String json = result.getResponse().getContentAsString();
-	 System.out.println(json);
-	 }
+//	 @Test
+//	 public void testticket() throws Exception {
+//	 MvcResult result = mockMvc.perform(post("/checkTicket")
+//	 .param("ticket", "yRMtzWbxdpZFiSf7P5v0P78e3Ykz4LGZSatYsT2VXOI="))
+//	 .andExpect(status().isOk())
+//	 .andReturn();
+//	 String json = result.getResponse().getContentAsString();
+//	 System.out.println(json);
+//	 }
 
 //	 @Test
 //	 public void testticket() throws Exception {
@@ -142,31 +142,31 @@ public class AppControlerTest {
 //	 System.out.println(json);
 //	 }
 
-	// @Test
-	// public void resetpw() throws Exception {
-	// MvcResult result = mockMvc
-	// .perform(
-	// post("/resetPassword").param("code",
-	// "VcDUOchbp3YO0VVwFsh+zYFnQhCc1afxbpIZcHHfLrY=").param(
-	// "password", "fuqingyan"))
-	// .andExpect(status().isOk()).andReturn();
-	// String json = result.getResponse().getContentAsString();
-	// System.out.println(json);
-	// }
+	 @Test
+	 public void resetpw() throws Exception {
+	 MvcResult result = mockMvc
+	 .perform(
+	 post("/resetPassword").param("code",
+	 "NbwSQe4gJfe0Xqr%2B9fgsZw2WvgoXhZtxGDpyNuzv4wk%3D").param(
+	 "password", "123456"))
+	 .andExpect(status().isOk()).andReturn();
+	 String json = result.getResponse().getContentAsString();
+	 System.out.println(json);
+	 }
 
-	// @Test
-	// public void changePassword() throws Exception {
-	// MvcResult result = mockMvc
-	// .perform(
-	// post("/changePassword")
-	// .param("oldPassword",
-	// "73882AB1FA529D7273DA0DB6B49CC4F3")
-	// .param("userId", "100099")
-	// .param("newPassword", "444444"))
-	// .andExpect(status().isOk()).andReturn();
-	// String json = result.getResponse().getContentAsString();
-	// System.out.println(json);
-	// }
+//	 @Test
+//	 public void changePassword() throws Exception {
+//	 MvcResult result = mockMvc
+//	 .perform(
+//	 post("/changePassword")
+//	 .param("oldPassword",
+//	 "73882AB1FA529D7273DA0DB6B49CC4F3")
+//	 .param("userId", "100099")
+//	 .param("newPassword", "444444"))
+//	 .andExpect(status().isOk()).andReturn();
+//	 String json = result.getResponse().getContentAsString();
+//	 System.out.println(json);
+//	 }
 
 	// @Test
 	// public void modUserState() throws Exception {
