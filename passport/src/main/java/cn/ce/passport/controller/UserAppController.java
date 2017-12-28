@@ -1,5 +1,6 @@
 package cn.ce.passport.controller;
 
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -484,7 +485,8 @@ public class UserAppController {
 		retMap.put("msg", ErrorCodeNo.SYS000.getDesc());
 
 		try {
-			String email = sessionService.getEmail(code);
+
+			String email = sessionService.getEmail(URLDecoder.decode(code));
 
 			Map<String, Object> condition = new HashMap<String, Object>();
 			// 图省事,用以后查询用户列表的方法
